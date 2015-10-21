@@ -1,4 +1,11 @@
 <?php
+// foreach ($contents as $content){
+//     echo $content[0];
+//     }
+//print_r($contents);
+//exit;
+//$staff = array();
+
 function getMonths($no = 0){
     $month = date('m');
     $year = date('Y');
@@ -11,6 +18,30 @@ function getMonths($no = 0){
     $data = mktime(0, 0, 0, $x, 1, $year);
     return $data;
 }
+
+foreach($targets as $target){
+for($i = 0; $i < count($contents); $i++){
+    for($j=0; $j < 12;$j++){
+    if($contents[$i][0] == $target->name){
+        if($target->month == date('n',getMonths($j)) && date('Y',strtotime($target->date)) == date('Y',getMonths($j))){
+            $contents[$i][$j+1] = $target->target;
+        }
+        else{
+            $contents[$i][$j+1] = 0;
+        }
+    }
+    // else{
+    //     $contents[$i][$j+1] = 0;
+    // }
+    }//contents for loop
+}//months for loop
+}//foreach loop
+echo "<pre>";
+print_r($targets);
+echo "<br>";
+print_r($contents);
+exit;
+
 ?>
 <script>
     $(document).ready(function() {
@@ -52,7 +83,7 @@ function getMonths($no = 0){
                             </tr>
                         </thead>
                         <tbody>
-                        <?php if (isset($targets)){
+<?php if (isset($targets)){
                             foreach($targets as $target){
                             ?>
                             <tr>

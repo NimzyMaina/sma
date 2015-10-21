@@ -153,6 +153,8 @@ function staff_target(){
             }
              
         }
+
+        $this->data['names'] = $data;
         $i = 0;
         //print_r($data);exit;
         // foreach ($data as $dat){
@@ -164,14 +166,14 @@ function staff_target(){
             $content[$j][0] = $data[$j];
         }
 
-        for ($z = 0; $z < count($data); $z++){
-            foreach($targets as $tag){
-                if($tag->name == $content[$z][0]){
-                    array_push($content[$z],$tag->target.$tag->date);
-                }
-            }
-        }
-        $this->data['content'] = $content;
+        // for ($z = 0; $z < count($data); $z++){
+        //     foreach($targets as $tag){
+        //         if($tag->name == $content[$z][0]){
+        //             array_push($content[$z],$tag->target.$tag->date);
+        //         }
+        //     }
+        // }
+        $this->data['contents'] = $content;
         // echo $str = $this->db->last_query();
         //  echo json_encode($content);exit;
 
