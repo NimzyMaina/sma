@@ -198,14 +198,23 @@
                                     if (!empty($targets)) {
 
                                         foreach ($targets as $value) {
-                                            $array[$value->date] = "
+
+                                            $x = 0 ;
+
+                                            if($value[2] > 0){
+                                                $x = $value[1] / $value[2] * 100  ;
+                                            }else{
+                                                $x = 0;
+                                            }
+
+                                            $array[$value[0]] = "
                                             <table class='table table-bordered table-hover table-striped table-condensed data' style='margin:0;'>
                                             <tr><td>" . lang("monthly_target") . "</td></tr>
-                                            <tr><td>" . $this->sma->formatMoney($value->target) . "</td></tr>
+                                            <tr><td>" . $this->sma->formatMoney($value[1]) . "</td></tr>
                                             <tr><td>" . lang("monthly_sales") . "</td></tr>
-                                            <tr><td>" . $this->sma->formatMoney($value->total) . "</td></tr>
+                                            <tr><td>" . $this->sma->formatMoney($value[2]) . "</td></tr>
                                             <tr><td>" . lang("variance") . "</td></tr>
-                                            <tr><td>" . number_format($value->total / $value->target * 100 ) . "%</td></tr>
+                                            <tr><td>" . number_format($x) . "%</td></tr>
                                             </table>";
                                         }
 
@@ -214,7 +223,7 @@
                                             if (isset($array[$i])) {
                                                 echo $array[$i];
                                             } else {
-                                                echo '<strong>&nbsp;</strong>';
+                                                echo '<strong>Not Set</strong>';
                                             }
                                             echo "</td>";
                                         }
@@ -267,33 +276,32 @@
                 aoData.push({"name": "<?= $this->security->get_csrf_token_name() ?>", "value": "<?= $this->security->get_csrf_hash() ?>"});
                 $.ajax({'dataType': 'json', 'type': 'POST', 'url': sSource, 'data': aoData, 'success': fnCallback});
             },
-            "aoColumns": [{"mRender": fld}, null, null, null, null, null,  null, null, null, null,null,null,null,{"mRender": currencyFormat}],
+            "aoColumns": [{"mRender": fld}, null, null, null, null, null, null, null, null,null,null,null,{"mRender": currencyFormat}],
             "fnFooterCallback": function(nRow, aaData, iStart, iEnd, aiDisplay) {
-                 var gtotal = 0, paid = 0, balance = 0;
+                 var gtotal = 0, qty = 0, balance = 0;
                  for (var i = 0; i < aaData.length; i++) {
-                     gtotal += parseFloat(aaData[ aiDisplay[i] ][13]);
-                //     paid += parseFloat(aaData[ aiDisplay[i] ][6]);
+                     gtotal += parseFloat(aaData[ aiDisplay[i] ][12]);
+                     qty += parseFloat(aaData[ aiDisplay[i] ][11]);
                 //     balance += parseFloat(aaData[ aiDisplay[i] ][7]);
                  }
                  var nCells = nRow.getElementsByTagName('th');
-                 nCells[13].innerHTML = currencyFormat(parseFloat(gtotal));
-                // nCells[6].innerHTML = currencyFormat(parseFloat(paid));
+                 nCells[12].innerHTML = currencyFormat(parseFloat(gtotal));
+                 nCells[11].innerHTML = currencyFormat(parseFloat(qty));
                 // nCells[7].innerHTML = currencyFormat(parseFloat(balance));
             }
         }).fnSetFilteringDelay().dtFilter([
          {column_number : 0, filter_default_label: "[<?=lang('date');?> (yyyy-mm-dd)]", filter_type: "text" },
          {column_number : 1, filter_default_label: "[<?=lang('reference_no');?>]", filter_type: "text" },
          {column_number : 2, filter_default_label: "[<?=lang('biller');?>]", filter_type: "text"},
-         {column_number : 3, filter_default_label: "[<?=lang('first_name');?>]", filter_type: "text" },
-         {column_number : 4, filter_default_label: "[<?=lang('last_name');?>]", filter_type: "text" },
-         {column_number : 5, filter_default_label: "[<?=lang('route_id');?>]", filter_type: "text" },
-         {column_number : 6, filter_default_label: "[<?=lang('outlet_id');?>]", filter_type: "text" },
-         {column_number : 7, filter_default_label: "[<?=lang('type');?>]", filter_type: "text" },
-         {column_number : 8, filter_default_label: "[<?=lang('receipt_no');?>]", filter_type: "text" },
-         {column_number : 9, filter_default_label: "[<?=lang('category_name');?>]", filter_type: "text" },
-         {column_number : 10, filter_default_label: "[<?=lang('product_code');?>]", filter_type: "text" },
-         {column_number : 11, filter_default_label: "[<?=lang('product_name');?>]", filter_type: "text" },
-         {column_number : 12, filter_default_label: "[<?=lang('quantity');?>]", filter_type: "text" },
+         {column_number : 3, filter_default_label: "[<?=lang('full_name');?>]", filter_type: "text" },
+         {column_number : 4, filter_default_label: "[<?=lang('route_id');?>]", filter_type: "text" },
+         {column_number : 5, filter_default_label: "[<?=lang('outlet_id');?>]", filter_type: "text" },
+         {column_number : 6, filter_default_label: "[<?=lang('type');?>]", filter_type: "text" },
+         {column_number : 7, filter_default_label: "[<?=lang('receipt_no');?>]", filter_type: "text" },
+         {column_number : 8, filter_default_label: "[<?=lang('category_name');?>]", filter_type: "text" },
+         {column_number : 9, filter_default_label: "[<?=lang('product_code');?>]", filter_type: "text" },
+         {column_number : 10, filter_default_label: "[<?=lang('product_name');?>]", filter_type: "text" },
+         {column_number : 11, filter_default_label: "[<?=lang('quantity');?>]", filter_type: "text" },
          //{column_number : 13, filter_default_label: "[<?=lang('val');?>]", filter_type: "text" },
          ], "footer");
     });
@@ -398,8 +406,7 @@
                             <th><?= lang("date"); ?></th>
                             <th><?= lang("reference_no"); ?></th>
                             <th><?= lang("biller"); ?></th>
-                            <th><?= lang("first_name"); ?></th>
-                            <th><?= lang("last_name"); ?></th>
+                            <th><?= lang("full_name"); ?></th>
                             <th><?= lang("route_id"); ?></th>
                             <th><?= lang("outlet_id"); ?></th>
                             <th><?= lang("type"); ?></th>
@@ -419,7 +426,7 @@
                         </tbody>
                         <tfoot class="dtFilter">
                             <tr class="active">
-                                <th></th><th></th><th></th><th></th>
+                                <th></th><th></th><th></th>
                             <th></th><th></th><th></th><th></th><th></th>
                             <th></th><th></th><th></th><th></th><th></th>
                             </tr>

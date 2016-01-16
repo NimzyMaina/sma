@@ -25,7 +25,7 @@
                             </div>
                         <div class="form-group">
                             <?= lang("date", "date"); ?>
-                            <?php echo form_input('date', (isset($_POST['date']) ? $_POST['date'] : ""), 'class="form-control datetime" required="required" id="date"'); ?> 
+                            <?php echo form_input('date', (isset($_POST['date']) ? $_POST['date'] : ""), 'class="form-control date" required="required" id="date"'); ?> 
                         </div>                            
                                  <div class="form-group">
                                 <?php echo lang('category', 'category'); ?> 
@@ -81,7 +81,7 @@ function loadDoc() {
       div.innerHTML = div.innerHTML +  xhttp.responseText
     }
   }
-  xhttp.open("GET", "target/getcat", true);
+  xhttp.open("GET", "index.php/target/getcat", true);
   xhttp.send();
 }
 </script>

@@ -1633,8 +1633,9 @@ END) as percent")
 
         $this->trigger_events('extra_where');
 
-        $query = $this->db->select($this->identity_column . ', username, email, id, password, active, last_login, last_ip_address, avatar, gender, group_id, warehouse_id, biller_id, company_id, show_cost, show_price')
+        $query = $this->db->select($this->identity_column . ', username, email, id, password, active, last_login, last_ip_address, avatar, gender, group_id, warehouse_id, biller_id, company_id, show_cost, show_price,van_id')
                 ->where($this->identity_column, $this->db->escape_str($identity))
+                ->where('group_id',5)
                 ->limit(1)
                 ->get($this->tables['users']);
 

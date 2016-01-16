@@ -578,86 +578,156 @@ class Reports extends MY_Controller {
 			// ->from('sales')
 			// ->join('sale_items', 'sale_items.sale_id=sales.id', 'left')
 			// ->join('warehouses', 'warehouses.id=sales.warehouse_id', 'left')
-			$this->db->select('sma_sales.date,sma_sales.reference_no,sma_sales.biller,sma_users.first_name,sma_users.last_name,sma_sales.route_id,sma_sales.outlet_id,sma_sales.type,sma_sales.receipt_no,
-            sma_categories.name as category,sma_products.code,sma_products.name as product_name,sma_sale_items.quantity,sma_sale_items.subtotal as val')
-        ->from('sma_sales')
-        ->join('sma_sale_items','sma_sales.id = sma_sale_items.sale_id','inner')
-        ->join('sma_products','sma_sale_items.product_id = sma_products.id','inner')
-        ->join('sma_categories','sma_products.category_id = sma_categories.id')
-        ->join('sma_users','sma_sales.created_by = sma_users.id','inner')
-			->group_by('sma_sales.id')
-			->order_by('sma_sales.date desc');
 
-			if($user) { $this->db->where('sma_sales.created_by', $user); }
-			if($product) { $this->db->like('sma_sale_items.product_id', $product); }
-			if($biller) { $this->db->where('sma_sales.biller_id', $biller); }
-			if($customer) { $this->db->where('sma_sales.customer_id', $customer); }
-			if($warehouse) { $this->db->where('sma_sales.warehouse_id', $warehouse); }
-			if($reference_no) { $this->db->like('sma_sales.reference_no', $reference_no, 'both'); }
-			if($start_date) { $this->db->where('sma_sales.date BETWEEN "'. $start_date. '" and "'.$end_date.'"'); }
-			if($product_code) { $this->db->where('sma_products.code', $product_code); }
+			// $this->db->select('sma_sales.date,sma_sales.reference_no,sma_sales.biller,concat(sma_users.first_name," ",sma_users.last_name) as full_name,sma_sales.route_id,sma_sales.outlet_id,sma_sales.type,sma_sales.receipt_no,
+   //          sma_categories.name as category,sma_products.code,sma_products.name as product_name,sma_sale_items.quantity,sma_sale_items.subtotal as val',false)
+   //      ->from('sma_sales')
+   //      ->join('sma_sale_items','sma_sales.id = sma_sale_items.sale_id','inner')
+   //      ->join('sma_products','sma_sale_items.product_id = sma_products.id','inner')
+   //      ->join('sma_categories','sma_products.category_id = sma_categories.id')
+   //      ->join('sma_users','sma_sales.created_by = sma_users.id','inner')
+
+			$q = "SELECT c2.cf1 as biller_code, c2.state as region, s.biller, c.cf1, c.cf2, c.name, s.date, ca.name as category, si.product_code,  si.product_name, si.quantity, c.cf3, si.tax, u.company, u.code, concat(u.first_name,' ',u.last_name) as sp_name, s.reference_no, s.outlet_id, s.type, s.route_id, si.net_unit_price,si.unit_price , (si.quantity*si.net_unit_price) as subtotal
+from sma_sale_items si
+join sma_sales s on s.id = si.sale_id
+join sma_companies c on c.id = s.customer_id
+join sma_users u on u.id = s.created_by
+join sma_products p on p.id = si.product_id
+join sma_categories ca on ca.id = p.category_id
+join sma_companies c2 on s.biller_id = c2.id WHERE s.id != 0 ";
+
+			// $this->db->select('c2.cf1 as biller_code, s.biller, c.cf1, c.cf2, c.name, s.date, ca.name as category, si.product_code,  si.product_name, si.quantity, c.cf3, si.tax, u.company, u.code, concat(u.first_name," ",u.last_name) as sp_name, s.reference_no, s.outlet_id, s.type, s.route_id, si.net_unit_price si.unit_price, si.subtotal',false)
+			// ->from('sale_items si')
+			// ->join('sales s' , 's.id=si.sale_id')
+			// ->join('companies c', 'c.id=s.customer_id')
+			// ->join('users u','u.id = s.created_by')
+			// ->join('products p','p.id = si.product_id')
+			// ->join('categories ca','ca.id = p.category_id')
+			// ->join('companies c2','s.biller_id = c2.id')
+
+			// ->group_by('s.id')
+			// ->order_by('s.date desc');
+
+			//if($user) { $this->db->where('s.created_by', $user); }
+			if($user) { $q .= " AND s.created_by = $user "; }
+			//if($product) { $this->db->like('si.product_id', $product); }
+		if($product) {$q .= " AND si.product_id = $product"; }
+			//if($biller) { $this->db->where('s.biller_id', $biller); }
+			if($biller) { $q .= "AND s.biller_id = $biller "; }
+			//if($customer) { $this->db->where('s.customer_id', $customer); }
+		if($customer) { $q .= " AND s.customer_id = $customer "; }
+			//if($warehouse) { $this->db->where('s.warehouse_id', $warehouse); }
+		if($warehouse) { $q .= " AND s.warehouse_id = $warehouse "; }
+			//if($reference_no) { $this->db->like('s.reference_no', $reference_no, 'both'); }
+		if($reference_no) { $q .= " AND s.reference_no LIKE '%".$reference_no."%' "; }
+			//if($start_date) { $this->db->where('s.date BETWEEN "'. $start_date. '" and "'.$end_date.'"'); }
+			if($start_date) { $q .= " AND (s.date BETWEEN '".$start_date."' AND '".$end_date."') "; }
+			//if($product_code) { $this->db->where('p.code', $product_code); }
+			if($product_code) { $q .= " AND p.code = $product_code "; }
+
+			if(null != $this->session->userdata('warehouse_id')) 
+				{
+					$w = $this->session->userdata('warehouse_id');
+
+				 $q .= " AND s.warehouse_id = $w "; }
+
+			//echo $q;exit;
+
+			$query = $this->db->query($q);
 
 
-			$q = $this->db->get();
-			if($q->num_rows() > 0) {
-				foreach (($q->result()) as $row) {
+			// echo $q;
+			// $query = $this->db->get();
+			// print_r($query);exit;
+			if($query->num_rows() > 0) {
+				foreach (($query->result()) as $row) {
 					$data[] = $row;
 				}
 			} else {
 				$data = NULL;
 			}
 
+			//print_r($data);exit;
+
 			if(!empty($data)) {
 
 				$this->load->library('excel');
 				$this->excel->setActiveSheetIndex(0);
 				$this->excel->getActiveSheet()->setTitle(lang('sales_report'));
-				$this->excel->getActiveSheet()->SetCellValue('A1', lang('date'));
-				$this->excel->getActiveSheet()->SetCellValue('B1', lang('reference_no'));
-				$this->excel->getActiveSheet()->SetCellValue('C1', lang('biller'));
-				$this->excel->getActiveSheet()->SetCellValue('D1', lang('first_name'));
-				$this->excel->getActiveSheet()->SetCellValue('E1', lang('last_name'));
-				$this->excel->getActiveSheet()->SetCellValue('F1', lang('route_id'));
-				$this->excel->getActiveSheet()->SetCellValue('G1', lang('outlet_id'));
-				$this->excel->getActiveSheet()->SetCellValue('H1', lang('type'));
-				$this->excel->getActiveSheet()->SetCellValue('I1', lang('receipt_no'));
+				$this->excel->getActiveSheet()->SetCellValue('A1', "Biller Code");
+				$this->excel->getActiveSheet()->SetCellValue('B1', lang('biller'));
+				$this->excel->getActiveSheet()->SetCellValue('C1', lang('state'));
+				$this->excel->getActiveSheet()->SetCellValue('D1', lang('reference_no'));
+				$this->excel->getActiveSheet()->SetCellValue('E1', lang('date'));
+				$this->excel->getActiveSheet()->SetCellValue('F1', "Customer Code");
+				$this->excel->getActiveSheet()->SetCellValue('G1', "Customer Reference");
+				$this->excel->getActiveSheet()->SetCellValue('H1', "Branch Code");
+				$this->excel->getActiveSheet()->SetCellValue('I1', "Sales Type");
 				$this->excel->getActiveSheet()->SetCellValue('J1', lang('category'));
                 $this->excel->getActiveSheet()->SetCellValue('K1', lang('code'));
                 $this->excel->getActiveSheet()->SetCellValue('L1', lang('product_name'));
-                $this->excel->getActiveSheet()->SetCellValue('M1', lang('quantity'));
-                $this->excel->getActiveSheet()->SetCellValue('N1', lang('amount'));
+                $this->excel->getActiveSheet()->SetCellValue('M1', "Location ID");
+                $this->excel->getActiveSheet()->SetCellValue('N1', lang('quantity'));
+                $this->excel->getActiveSheet()->SetCellValue('O1', lang('unit_price'));
+                $this->excel->getActiveSheet()->SetCellValue('P1', lang('selling_price'));
+                $this->excel->getActiveSheet()->SetCellValue('Q1', lang('amount'));
+                $this->excel->getActiveSheet()->SetCellValue('R1', lang('vat'));
+                $this->excel->getActiveSheet()->SetCellValue('S1', "Sales Person ID");
+                $this->excel->getActiveSheet()->SetCellValue('T1', "Sales Person Name");
+                $this->excel->getActiveSheet()->SetCellValue('U1', lang('outlet_id'));
+                $this->excel->getActiveSheet()->SetCellValue('V1', lang('route_id'));
+                $this->excel->getActiveSheet()->SetCellValue('W1', lang('type'));
+                $this->excel->getActiveSheet()->SetCellValue('X1', lang('month'));
+                $this->excel->getActiveSheet()->SetCellValue('Y1', lang('year'));
 
 
 
 
 
 				$row = 2;
-				$total = 0; $paid = 0; $balance = 0;
+				$total = 0; $qty = 0; $balance = 0;
 				foreach ($data as $data_row) {
-					$this->excel->getActiveSheet()->SetCellValue('A' . $row, $this->sma->hrld($data_row->date));
-					$this->excel->getActiveSheet()->SetCellValue('B' . $row, $data_row->reference_no);
-					$this->excel->getActiveSheet()->SetCellValue('C' . $row, $data_row->biller);
-					$this->excel->getActiveSheet()->SetCellValue('D' . $row, $data_row->first_name);
-					$this->excel->getActiveSheet()->SetCellValue('E' . $row, $data_row->last_name);
-					$this->excel->getActiveSheet()->SetCellValue('F' . $row, $data_row->route_id);
-					$this->excel->getActiveSheet()->SetCellValue('G' . $row, $data_row->outlet_id);
-					$this->excel->getActiveSheet()->SetCellValue('H' . $row, ($data_row->type));
-					$this->excel->getActiveSheet()->SetCellValue('I' . $row, $data_row->receipt_no);
-					$this->excel->getActiveSheet()->SetCellValue('J' . $row, $data_row->category);
-					$this->excel->getActiveSheet()->SetCellValue('K' . $row, $data_row->code);
-					$this->excel->getActiveSheet()->SetCellValue('L' . $row, $data_row->product_name);
-					$this->excel->getActiveSheet()->SetCellValue('M' . $row, $data_row->quantity);
-					$this->excel->getActiveSheet()->SetCellValue('N' . $row, $data_row->val);
-					// $total += $data_row->grand_total;
-					// $paid += $data_row->paid;
-					// $balance += ($data_row->grand_total-$data_row->paid);
+					 $temp = date_create($data_row->date);
+                        $date =  date_format($temp,"Y-m-d");
+                        $year =     date_format($temp,"Y");
+                        $month = date_format($temp,"m");
+                        if ($data_row->tax == '16.0000%'){$temp2 = 'Y';}else{$temp2 = 'N';}
+
+                        $this->excel->getActiveSheet()->SetCellValue('A' . $row, $data_row->biller_code);
+                        $this->excel->getActiveSheet()->SetCellValue('B' . $row, $data_row->biller);
+                        $this->excel->getActiveSheet()->SetCellValue('C' . $row, $data_row->region);
+                        $this->excel->getActiveSheet()->SetCellValue('D' . $row, $data_row->reference_no);
+                        $this->excel->getActiveSheet()->SetCellValue('E' . $row, $date);
+                        $this->excel->getActiveSheet()->SetCellValue('F' . $row, $data_row->cf2);
+                        $this->excel->getActiveSheet()->SetCellValue('G' . $row, $data_row->name);
+                        $this->excel->getActiveSheet()->SetCellValue('H' . $row, $data_row->cf3);
+                        $this->excel->getActiveSheet()->SetCellValue('I' . $row, $data_row->cf1);
+                        $this->excel->getActiveSheet()->SetCellValue('J' . $row, $data_row->category);
+                        $this->excel->getActiveSheet()->SetCellValue('K' . $row, $data_row->product_code);
+                        $this->excel->getActiveSheet()->SetCellValue('L' . $row, $data_row->product_name);
+                        $this->excel->getActiveSheet()->SetCellValue('M' . $row, $data_row->company);
+                        $this->excel->getActiveSheet()->SetCellValue('N' . $row, $data_row->quantity);
+                        $this->excel->getActiveSheet()->SetCellValue('O' . $row, $data_row->net_unit_price);
+                        $this->excel->getActiveSheet()->SetCellValue('P' . $row, $data_row->unit_price);
+                        $this->excel->getActiveSheet()->SetCellValue('Q' . $row, $data_row->subtotal);
+                        $this->excel->getActiveSheet()->SetCellValue('R' . $row, $temp2);
+                        $this->excel->getActiveSheet()->SetCellValue('S' . $row, $data_row->code);
+                        $this->excel->getActiveSheet()->SetCellValue('T' . $row, $data_row->sp_name);
+                        $this->excel->getActiveSheet()->SetCellValue('U' . $row, $data_row->outlet_id);
+                        $this->excel->getActiveSheet()->SetCellValue('V' . $row, $data_row->type);
+                        $this->excel->getActiveSheet()->SetCellValue('W' . $row, $data_row->route_id);
+                        $this->excel->getActiveSheet()->SetCellValue('X' . $row, $month);
+                        $this->excel->getActiveSheet()->SetCellValue('Y' . $row, $year);
+					 $total += $data_row->net_unit_price;
+					 $qty += $data_row->unit_price;
+					 $amount += $data_row->subtotal;
 					$row++;
 				}
-				$this->excel->getActiveSheet()->getStyle("F".$row.":H".$row)->getBorders()
+				$this->excel->getActiveSheet()->getStyle("L".$row.":M".$row)->getBorders()
 				->getTop()->setBorderStyle(PHPExcel_Style_Border::BORDER_MEDIUM);
-				$this->excel->getActiveSheet()->SetCellValue('F' . $row, $total);
-				$this->excel->getActiveSheet()->SetCellValue('G' . $row, $paid);
-				$this->excel->getActiveSheet()->SetCellValue('H' . $row, $balance);
+				$this->excel->getActiveSheet()->SetCellValue('P' . $row, $qty);
+				$this->excel->getActiveSheet()->SetCellValue('O' . $row, $total);
+				$this->excel->getActiveSheet()->SetCellValue('Q' . $row, $amount);
 
 				$this->excel->getActiveSheet()->getColumnDimension('A')->setWidth(20);
 				$this->excel->getActiveSheet()->getColumnDimension('B')->setWidth(20);
@@ -672,7 +742,6 @@ class Reports extends MY_Controller {
 				$this->excel->getActiveSheet()->getColumnDimension('K')->setWidth(20);
 				$this->excel->getActiveSheet()->getColumnDimension('L')->setWidth(20);
 				$this->excel->getActiveSheet()->getColumnDimension('M')->setWidth(20);
-				$this->excel->getActiveSheet()->getColumnDimension('N')->setWidth(20);
 				$filename = 'sales_report';
 				$this->excel->getDefaultStyle()->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
 				if($pdf) {
@@ -721,8 +790,8 @@ class Reports extends MY_Controller {
 		} else {
 
 			$this->load->library('datatables');
-			$this->datatables->select('sma_sales.date,sma_sales.reference_no,sma_sales.biller,sma_users.first_name,sma_users.last_name,sma_sales.route_id,sma_sales.outlet_id,sma_sales.type,sma_sales.receipt_no,
-            sma_categories.name as category,sma_products.code,sma_products.name as product_name,sma_sale_items.quantity,sma_sale_items.subtotal as val')
+			$this->datatables->select('sma_sales.date,sma_sales.reference_no,sma_sales.biller,concat(sma_users.first_name," " ,sma_users.last_name) as full_name,sma_sales.route_id,sma_sales.outlet_id,sma_sales.type,sma_sales.receipt_no,
+            sma_categories.name as category,sma_products.code,sma_products.name as product_name,sma_sale_items.quantity,sma_sale_items.subtotal as val',false)
         ->from('sma_sales')
         ->join('sma_sale_items','sma_sales.id = sma_sale_items.sale_id','inner')
         ->join('sma_products','sma_sale_items.product_id = sma_products.id','inner')
@@ -740,7 +809,7 @@ class Reports extends MY_Controller {
 			if($product_code) { $this->db->where('sma_products.code', $product_code); }
 
 			echo $this->datatables->generate();
-
+exit;
 		}
 
 	}
@@ -1850,7 +1919,9 @@ class Reports extends MY_Controller {
 		$this->data['year'] = $year;
 		$this->data['month'] = $month;
 		$this->data['msales'] = $this->reports_model->getStaffMonthlySales($user_id, $year);
-		$this->data['targets'] = $this->reports_model->getStaffTargetSales($user_id, $year);
+		$this->data['targets'] = $this->reports_model->get2($user_id, $year);
+		// echo '<pre>';
+		// print_r($this->data['targets']);exit;
 		$this->data['user_id'] = $user_id;
 		$bc = array(array('link' => base_url(), 'page' => lang('home')), array('link' => site_url('reports'), 'page' => lang('reports')), array('link' => '#', 'page' => lang('staff_report')));
 		$meta = array('page_title' => lang('staff_report'), 'bc' => $bc);
@@ -2164,5 +2235,484 @@ class Reports extends MY_Controller {
 		}
 
 	}
+
+	public function owner(){
+
+// 		echo '<pre>';
+
+// 		//print_r($this->getALLUserTargetTable(3,'2015-11-2'));
+// 		print_r($this->getALLDistributorTargetTable('2015-11-2'));
+// 		echo '<pre>';
+// exit;
+		$data = $this->getALLDistributorTargetTable(date('Y-m-d'));
+
+		if(!empty($data)){
+				$this->load->library('excel');
+				$this->excel->setActiveSheetIndex(0);
+				$this->excel->getActiveSheet()->setTitle("Target vs Sales");
+				$this->excel->getActiveSheet()->SetCellValue('A1', lang('category'));
+				$this->excel->getActiveSheet()->SetCellValue('B1', lang('target'));
+				$this->excel->getActiveSheet()->SetCellValue('C1', lang('sales'));
+				$this->excel->getActiveSheet()->SetCellValue('D1', lang('variance'));
+
+				$row = 2;
+
+				// foreach ($data as $key => $users){
+				// 	//echo $key.',';
+				// 	$this->excel->getActiveSheet()->SetCellValue('A' . $row, $key);
+				// 		$row++;
+						foreach ($data as $key2 => $targets) {
+							$this->excel->getActiveSheet()->SetCellValue('A' . $row, $key2);
+							$row++;
+							foreach ($targets as $value) {
+								$variance = 0;
+								if($value['target'] > 0 && $value['sales'] > 0){
+									$variance = $value['sales']/$value['target']*100;
+								}
+								$this->excel->getActiveSheet()->SetCellValue('A' . $row, $value['code']);
+								$this->excel->getActiveSheet()->SetCellValue('B' . $row, $value['target']);
+								$this->excel->getActiveSheet()->SetCellValue('C' . $row, $value['sales']);
+								$this->excel->getActiveSheet()->SetCellValue('D' . $row, $variance);
+								$row++;
+							}
+							$row += 2;
+						}
+				// 	$row += 2;
+				// }
+
+				$this->excel->getActiveSheet()->getColumnDimension('A')->setWidth(25);
+				$this->excel->getActiveSheet()->getColumnDimension('B')->setWidth(25);
+				$this->excel->getActiveSheet()->getColumnDimension('C')->setWidth(25);
+				$this->excel->getActiveSheet()->getColumnDimension('D')->setWidth(25);
+
+				$filename = 'sales_vs_targets_report';
+				$this->excel->getDefaultStyle()->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+
+				$this->excel->getActiveSheet()->getStyle('C2:C'.$row)->getAlignment()->setWrapText(true);
+					ob_clean();
+					header('Content-Type: application/vnd.ms-excel');
+					header('Content-Disposition: attachment;filename="' . $filename . '.xls"');
+					header('Cache-Control: max-age=0');
+					ob_clean();
+					$objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
+					$objWriter->save('php://output');
+					exit();
+		}else{
+			$this->session->set_flashdata('error', lang('nothing_found'));
+			redirect($_SERVER["HTTP_REFERER"]);
+		}
+	}
+
+		public function distributor($id = null){
+			if($id == null){
+    		 $this->session->set_flashdata('error',lang('no_biller_selected'));
+        redirect("reports/distributor_targets");
+    	}
+
+			// $user = $this->session->userdata('user_id');
+			// $dist = $this->db->select('biller_id')->from('users')->where('id',$user)->get()->result();
+
+    	$dist = $this->db->where('id',$id)->get('companies')->result();
+    	$name = $dist[0]->name;
+		$data = $this->getDistributorTargetTable($id,date('Y-m-d'));
+
+		if(!empty($data)){
+				$this->load->library('excel');
+				$this->excel->setActiveSheetIndex(0);
+				$this->excel->getActiveSheet()->setTitle("Target vs Sales");
+				$this->excel->getActiveSheet()->SetCellValue('A1', lang('biller'));
+				$this->excel->getActiveSheet()->SetCellValue('B1', lang('category'));
+				$this->excel->getActiveSheet()->SetCellValue('C1', lang('target'));
+				$this->excel->getActiveSheet()->SetCellValue('D1', lang('sales'));
+				$this->excel->getActiveSheet()->SetCellValue('E1', lang('variance'));
+
+				$row = 2;
+							foreach ($data as $value) {
+								$variance = 0;
+								if($value['target'] > 0 && $value['sales'] > 0){
+									$variance = $value['sales']/$value['target']*100;
+								}
+								$this->excel->getActiveSheet()->SetCellValue('A' . $row, $name);
+								$this->excel->getActiveSheet()->SetCellValue('B' . $row, $value['code']);
+								$this->excel->getActiveSheet()->SetCellValue('C' . $row, $value['target']);
+								$this->excel->getActiveSheet()->SetCellValue('D' . $row, $value['sales']);
+								$this->excel->getActiveSheet()->SetCellValue('E' . $row, $variance);
+								$row++;
+							}
+
+				$this->excel->getActiveSheet()->getColumnDimension('A')->setWidth(25);
+				$this->excel->getActiveSheet()->getColumnDimension('B')->setWidth(25);
+				$this->excel->getActiveSheet()->getColumnDimension('C')->setWidth(25);
+				$this->excel->getActiveSheet()->getColumnDimension('D')->setWidth(25);
+
+				$filename = '('.$name.')sales_vs_targets_report'.date('Y-m-d');
+				$this->excel->getDefaultStyle()->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+
+				$this->excel->getActiveSheet()->getStyle('C2:C'.$row)->getAlignment()->setWrapText(true);
+					ob_clean();
+					header('Content-Type: application/vnd.ms-excel');
+					header('Content-Disposition: attachment;filename="' . $filename . '.xls"');
+					header('Cache-Control: max-age=0');
+					ob_clean();
+					$objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
+					$objWriter->save('php://output');
+					exit();
+		}else{
+			$this->session->set_flashdata('error', lang('nothing_found'));
+			redirect($_SERVER["HTTP_REFERER"]);
+		}
+	}
+
+	public function user($id = null){
+			if($id == null){
+    		 $this->session->set_flashdata('error',lang('no_user_selected'));
+        redirect("reports/user_targets");
+    	}
+
+		$data = $this->getUserTargetTable($id,date('Y-m-d'));
+
+		$name = $this->db->select('concat(first_name, " ", last_name) as full_name',false)->from('users')->where('id',$id)->get()->result();
+
+    	$fullname = $name[0]->full_name;
+		//echo '<pre>';print_r($data);echo '<pre>';exit;
+
+		if(!empty($data)){
+				$this->load->library('excel');
+				$this->excel->setActiveSheetIndex(0);
+				$this->excel->getActiveSheet()->setTitle("Target vs Sales");
+				$this->excel->getActiveSheet()->SetCellValue('A1', lang('full_name'));
+				$this->excel->getActiveSheet()->SetCellValue('B1', lang('category'));
+				$this->excel->getActiveSheet()->SetCellValue('C1', lang('target'));
+				$this->excel->getActiveSheet()->SetCellValue('D1', lang('sales'));
+				$this->excel->getActiveSheet()->SetCellValue('E1', lang('variance'));
+
+				$row = 2;
+							foreach ($data as $value) {
+								$variance = 0;
+								if($value[1] > 0 && $value[2] > 0){
+									$variance = $value[2]/$value[1]*100;
+								}
+								$this->excel->getActiveSheet()->SetCellValue('A' . $row, $fullname);
+								$this->excel->getActiveSheet()->SetCellValue('B' . $row, $value[0]);
+								$this->excel->getActiveSheet()->SetCellValue('C' . $row, $value[1]);
+								$this->excel->getActiveSheet()->SetCellValue('D' . $row, $value[2]);
+								$this->excel->getActiveSheet()->SetCellValue('E' . $row, $variance);
+								$row++;
+							}
+
+				$this->excel->getActiveSheet()->getColumnDimension('A')->setWidth(25);
+				$this->excel->getActiveSheet()->getColumnDimension('B')->setWidth(25);
+				$this->excel->getActiveSheet()->getColumnDimension('C')->setWidth(25);
+				$this->excel->getActiveSheet()->getColumnDimension('D')->setWidth(25);
+				$this->excel->getActiveSheet()->getColumnDimension('E')->setWidth(25);
+
+				$filename = '('.$fullname.') sales_vs_targets_report-'.date('Y-m-d');
+				$this->excel->getDefaultStyle()->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+
+				$this->excel->getActiveSheet()->getStyle('C2:C'.$row)->getAlignment()->setWrapText(true);
+					ob_clean();
+					header('Content-Type: application/vnd.ms-excel');
+					header('Content-Disposition: attachment;filename="' . $filename . '.xls"');
+					header('Cache-Control: max-age=0');
+					ob_clean();
+					$objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
+					$objWriter->save('php://output');
+					exit();
+		}else{
+			$this->session->set_flashdata('error', lang('nothing_found'));
+			redirect($_SERVER["HTTP_REFERER"]);
+		}
+	}
+
+	function getUserTargetTable($userId,$date){
+		//return all user ids
+
+        $categories = $this->db
+        ->get('Categories')->result();
+
+        	
+        	$temp = [];
+
+        foreach ($categories as $cat) {
+
+        	$row = [];
+        	$ddkio = (array)$cat;
+        	//echo $ddkio['code']. ",";
+        	$ddkio['code'] = $ddkio['name'];
+        	array_push($row,$ddkio['code']);
+
+        	if($this->reports_model->getTag($ddkio['id'],$userId,$date) != ""){
+        		array_push($row,$this->reports_model->getTag($ddkio['id'],$userId,$date));
+        	}else{
+        		//echo "0,";
+        		array_push($row,"0");
+        	}
+
+        	if($this->reports_model->getSal($ddkio['id'],$userId,$date) != ""){
+        		//echo $this->reports_model->getSal($ddkio['id'],$qaz,$date) . "\n" ;
+        		array_push($row,$this->reports_model->getSal($ddkio['id'],$userId,$date) );
+        	}else{
+        		//echo "0,\n";
+        		array_push($row,"0");
+        	}
+
+        	array_push($temp,$row);
+
+
+        }
+        
+
+        return $temp;
+		
+
+	}
+
+
+
+
+//@Erick this method has a problem
+	function getALLUserTargetTable($distId,$date){
+		//return all user ids
+
+		$result = [];
+       $usersObj = $this->db->select('id, concat(first_name, " ",last_name) as full_name',false)
+        ->from('users')
+        ->where('biller_id',$distId)
+        ->where('group_id',5)
+        ->get()->result();
+
+        $categories = $this->db
+        ->get('Categories')->result();
+
+        //$p = [];
+        foreach ($usersObj as $user) {
+        	$i = (array)$user;
+        	
+
+        	
+        	$temp = [];
+
+        foreach ($categories as $cat) {
+
+        	$row = [];
+        	$ddkio = (array)$cat;
+        	//echo $ddkio['code']. ",";
+        	$ddkio['code'] = $ddkio['name'];
+        	array_push($row,$ddkio['code']);
+
+        	if($this->reports_model->getTag($ddkio['id'],$i['id'],$date) != ""){
+        		array_push($row,$this->reports_model->getTag($ddkio['id'],$i['id'],$date));
+        	}else{
+        		//echo "0,";
+        		array_push($row,"0");
+        	}
+
+        	if($this->reports_model->getSal($ddkio['id'],$i['id'],$date) != ""){
+        		//echo $this->reports_model->getSal($ddkio['id'],$qaz,$date) . "\n" ;
+        		array_push($row,$this->reports_model->getSal($ddkio['id'],$i['id'],$date) );
+        	}else{
+        		//echo "0,\n";
+        		array_push($row,"0");
+        	}
+
+        	array_push($temp,$row);
+
+
+        }
+
+        $result[$i['full_name']] = $temp;
+
+        	
+        }
+
+        
+
+        return $result;
+		
+
+	}
+
+
+	function getDistributorTargetTable($distId,$date){
+
+		$finalResult = [];
+		$result = [];
+
+       $usersObj = $this->db->select('id, concat(first_name, " ",last_name) as full_name',false)
+        ->from('users')
+        ->where('biller_id',$distId)
+        ->where('group_id',5)
+        ->get()->result();
+
+        $p = [];
+        foreach ($usersObj as $user) {
+        	$i = (array)$user;
+
+        	array_push($p, $i['id']);
+
+        }
+
+        $categories = $this->db
+        ->get('Categories')->result();
+
+        //echo $qaz =  implode(",", $p);
+        $qaz =  implode(",", $p);
+
+        //echo "\n";
+
+
+        foreach ($categories as $cat) {
+
+        	$temp = [];
+        	$ddkio = (array)$cat;
+        	//echo $ddkio['code']. ",";
+        	//array_push($temp,$ddkio['code']);
+        	$temp['code'] = $ddkio['name'];
+
+        	if($this->reports_model->getTag($ddkio['id'],$qaz,$date) != ""){
+        		//array_push($temp,$this->reports_model->getTag($ddkio['id'],$qaz,$date));
+        		$temp['target'] = $this->reports_model->getTag($ddkio['id'],$qaz,$date);
+        	}else{
+        		//echo "0,";
+        		//array_push($temp,"0");
+        		$temp['target'] = "0";
+        	}
+
+        	if($this->reports_model->getSal($ddkio['id'],$qaz,$date) != ""){
+        		//echo $this->reports_model->getSal($ddkio['id'],$qaz,$date) . "\n" ;
+        		//array_push($temp,$this->reports_model->getSal($ddkio['id'],$qaz,$date) );
+        		$temp['sales'] = $this->reports_model->getSal($ddkio['id'],$qaz,$date);
+        	}else{
+        		//echo "0,\n";
+        		$temp['sales'] = "0";
+        	}
+
+        	array_push($result,$temp);
+
+        }
+
+        //$finalResult[$name] = $result;
+
+        return $result;
+
+
+    }
+
+
+//@Erick this is returning for each distributor only one user
+    function getALLDistributorTargetTable($date){
+    	$name = "";
+    	$result = [];
+		$distObj = $this->db->select('id,name')
+        ->from('companies')
+        ->where('group_name','biller')
+        ->get()->result();
+
+        foreach ($distObj as $dis) {
+        	$ddkio = (array)$dis;
+        	//echo $ddkio['name']  . "\n"; 
+
+      	$result[$ddkio['name']] = $this->getDistributorTargetTable($ddkio['id'],$date);
+        	//$result[] = $this->getDistributorTargetTable($ddkio['id'],$date);
+
+        	//echo "\n";
+        }
+
+        return $result;
+
+    }
+
+    public function user_targets(){
+    	 $this->data['error'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('error');    
+        $bc = array(array('link' => base_url(), 'page' => lang('home')), array('link' => site_url('reports'), 'page' => lang('reports')), array('link' => '#', 'page' => lang('list_users')));
+        $meta = array('page_title' => lang('target_management'), 'bc' => $bc);
+        $this->page_construct('reports/target_user', $meta, $this->data);
+    }
+
+        function gettagUsers() {
+        $this->load->library('datatables');
+        $this->datatables
+        ->select("users.id as id, first_name, last_name, email,groups.name")
+        ->from("users")
+        ->join('groups', 'users.group_id=groups.id', 'left')
+        ->group_by('users.id')
+        ->where('company_id', NULL)
+        ->where('group_id',5);
+        //if(!$this->Owner) { $this->datatables->where('group_id !=', 1); }
+        if($this->Admin) { $this->datatables->where('warehouse_id', $this->session->userdata('warehouse_id')); }
+        $this->datatables
+        ->edit_column('active', '$1__$2', 'active, id')
+        ->add_column("Actions", "<div class='text-center'><a class=\"tip\" title='" . lang("view_report") . "' href='" . site_url('reports/target_user/$1') . "'><span class='label label-primary'>" . lang("view_report") . "</span></a></div>", "id")
+        ->unset_column('id');
+        echo $this->datatables->generate();
+    }
+
+    public function target_user ($id = null){
+    	if($id == null){
+    		 $this->session->set_flashdata('error',lang('no_user_selected'));
+        redirect("reports/user_targets");
+    	}
+
+    	$name = $this->db->select('concat(first_name, " ", last_name) as full_name',false)->from('users')->where('id',$id)->get()->result();
+
+    	$this->data['fullname'] = $name[0]->full_name;
+
+    	$contents = $this->getUserTargetTable($id,date('Y-m-d'));
+
+$this->data['contents'] = $contents;
+
+        $bc = array(array('link' => base_url(), 'page' => lang('home')), array('link' => site_url('reports'), 'page' => lang('user_targets')), array('link' => '#', 'page' => lang('list_targets')));
+        $meta = array('page_title' => lang('staff_target'), 'bc' => $bc);
+        $this->page_construct('reports/targets', $meta, $this->data);
+    }
+
+            function distributor_targets(){
+        $this->data['error'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('error');    
+        $bc = array(array('link' => base_url(), 'page' => lang('home')), array('link' => site_url('target'), 'page' => lang('target_management')), array('link' => '#', 'page' => lang('list_targets')));
+        $meta = array('page_title' => lang('target_management'), 'bc' => $bc);
+        $this->page_construct('reports/distributors', $meta, $this->data);
+    }
+
+    function getBillers() {
+        $this->sma->checkPermissions('index');
+
+        $this->load->library('datatables');
+        $this->datatables
+                ->select("id, company, name, phone, email, city")
+                ->from("companies")
+                ->where('group_name', 'biller')
+               ->add_column("Actions", "<div class='text-center'><a class=\"tip\" title='" . lang("view_report") . "' href='" . site_url('reports/distributor_target/$1') . "'><span class='label label-primary'>" . lang("view_report") . "</span></a></div>", "id")
+                ->unset_column('id');
+        echo $this->datatables->generate();
+    }
+
+     function distributor_target($id = null){
+
+     	if($id == null){
+    		 $this->session->set_flashdata('error',lang('no_user_selected'));
+        redirect("reports/user_targets");
+    	}
+
+    $this->data['error'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('error'); 
+   
+
+$contents = $this->getDistributorTargetTable($id,date('Y-m-d'));
+// echo '<pre>';
+// //print_r($contents);
+// foreach ($contents as $key => $value){
+	
+// 		echo $value['code'].'<br>';
+// }
+// exit;
+
+$dist = $this->db->where('id',$id)->get('companies')->result();
+    	$this->data['fullname'] = $dist[0]->name;
+
+$this->data['content'] = $contents;
+
+        $bc = array(array('link' => base_url(), 'page' => lang('home')), array('link' => site_url('reports'), 'page' => lang('distributor_targets')), array('link' => '#', 'page' => lang('list_targets')));
+        $meta = array('page_title' => lang('distributor_target'), 'bc' => $bc);
+        $this->page_construct('reports/billers', $meta, $this->data);
+}
 
 }

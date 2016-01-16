@@ -19,18 +19,18 @@
                 //if(aData[7] > aData[9]){ nRow.className = "product_link warning"; } else { nRow.className = "product_link"; }
                 return nRow;
             },
-            "aoColumns": [{"bSortable": false, "mRender": checkbox}, {"mRender": fld}, null, null, null,null, {"mRender": row_status}, {"mRender": row_status}, {"mRender": currencyFormat}, {"mRender": currencyFormat}, {"mRender": currencyFormat}, {"mRender": row_status}, {"bSortable": false}],
+            "aoColumns": [{"bSortable": false, "mRender": checkbox}, {"mRender": fld}, null, null, null,null, {"mRender": row_status}, {"mRender": row_status}, {"mRender": currencyFormat}, null,null, {"mRender": row_status}, {"bSortable": false}],
             "fnFooterCallback": function(nRow, aaData, iStart, iEnd, aiDisplay) {
                 var gtotal = 0, paid = 0, balance = 0;
                 for (var i = 0; i < aaData.length; i++) {
                     gtotal += parseFloat(aaData[ aiDisplay[i] ][8]);
-                    paid += parseFloat(aaData[ aiDisplay[i] ][9]);
-                    balance += parseFloat(aaData[ aiDisplay[i] ][10]);
+                    //paid += parseFloat(aaData[ aiDisplay[i] ][9]);
+                    //balance += parseFloat(aaData[ aiDisplay[i] ][10]);
                 }
                 var nCells = nRow.getElementsByTagName('th');
                 nCells[8].innerHTML = currencyFormat(parseFloat(gtotal));
-                nCells[9].innerHTML = currencyFormat(parseFloat(paid));
-                nCells[10].innerHTML = currencyFormat(parseFloat(balance));
+                //nCells[9].innerHTML = currencyFormat(parseFloat(paid));
+                //nCells[10].innerHTML = currencyFormat(parseFloat(balance));
             }
         }).fnSetFilteringDelay().dtFilter([
          {column_number : 1, filter_default_label: "[<?=lang('date');?> (yyyy-mm-dd)]", filter_type: "text" },
@@ -40,6 +40,8 @@
          {column_number : 5, filter_default_label: "[<?=lang('full_name');?>]", filter_type: "text" },
          {column_number : 6, filter_default_label: "[<?='Exported'?>]", filter_type: "text" },
          {column_number : 7, filter_default_label: "[<?=lang('sale_status');?>]", filter_type: "text" },
+         {column_number : 9, filter_default_label: "[<?=lang('month');?>]", filter_type: "text" },
+         {column_number : 10, filter_default_label: "[<?=lang('year');?>]", filter_type: "text" },
          {column_number : 11, filter_default_label: "[<?=lang('payment_status');?>]", filter_type: "text" },
          ], "footer");
         
@@ -125,6 +127,9 @@
                     <ul class="dropdown-menu pull-right" class="tasks-menus" role="menu" aria-labelledby="dLabel">
                         <li><a href="<?= site_url('sales/add') ?>"><i class="fa fa-plus-circle"></i> <?= lang('add_sale') ?></a></li>
                         <li><a href="#" id="excel" data-action="export_excel"><i class="fa fa-file-excel-o"></i> <?= lang('export_to_excel') ?></a></li>
+                        <?php if(!$Owner && !$this->Admin){?>
+                        <li><a href="<?= site_url('reports/user').'/'.$this->session->userdata('user_id') ?>" ><i class="fa fa-file-excel-o"></i>Export Target Report</a></li>
+                        <?php }?>
                         <li><a href="#" id="pdf" data-action="export_pdf"><i class="fa fa-file-pdf-o"></i> <?= lang('export_to_pdf') ?></a></li>
                         <li class="divider"></li>
                         <?php if ($this->Owner || $this->Admin){?>
@@ -171,8 +176,8 @@
                                 <th><?php echo "Exported"; ?></th>
                                 <th><?php echo $this->lang->line("sale_status"); ?></th>
                                 <th><?php echo $this->lang->line("grand_total"); ?></th>
-                                <th><?php echo $this->lang->line("paid"); ?></th>
-                                <th><?php echo $this->lang->line("balance"); ?></th>
+                                <th><?php echo $this->lang->line("month"); ?></th>
+                                <th><?php echo $this->lang->line("year"); ?></th>
                                 <th><?php echo $this->lang->line("payment_status"); ?></th>
                                 <th style="width:80px; text-align:center;"><?php echo $this->lang->line("actions"); ?></th>
                             </tr>
@@ -189,8 +194,8 @@
                                 </th>
                                 <th></th><th></th><th></th><th></th><th></th><th></th><th></th>
                                 <th><?php echo $this->lang->line("grand_total"); ?></th>
-                                <th><?php echo $this->lang->line("paid"); ?></th>
-                                <th><?php echo $this->lang->line("balance"); ?></th>
+                                <th></th>
+                                <th></th>
                                 <th></th>
                                 <th style="width:80px; text-align:center;"><?php echo $this->lang->line("actions"); ?></th>
                             </tr>

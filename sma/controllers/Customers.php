@@ -38,7 +38,11 @@ class Customers extends MY_Controller {
                 ->from("companies")
                 ->where('group_name', 'customer')
                 ->add_column("Actions", "<center><a class=\"tip\" title='" . $this->lang->line("edit_customer") . "' href='" . site_url('customers/edit/$1') . "' data-toggle='modal' data-target='#myModal'><i class=\"fa fa-edit\"></i></a> <a class=\"tip\" title='" . $this->lang->line("list_users") . "' href='" . site_url('customers/users/$1') . "' data-toggle='modal' data-target='#myModal'><i class=\"fa fa-users\"></i></a> <a class=\"tip\" title='" . $this->lang->line("add_user") . "' href='" . site_url('customers/add_user/$1') . "' data-toggle='modal' data-target='#myModal'><i class=\"fa fa-plus-circle\"></i></a> <a href='#' class='tip po' title='<b>" . $this->lang->line("delete_customer") . "</b>' data-content=\"<p>" . lang('r_u_sure') . "</p><a class='btn btn-danger po-delete' href='" . site_url('customers/delete/$1') . "'>" . lang('i_m_sure') . "</a> <button class='btn po-close'>" . lang('no') . "</button>\"  rel='popover'><i class=\"fa fa-trash-o\"></i></a></center>", "id");
-                //->unset_column('id');
+
+            if(null != $this->session->userdata('warehouse_id')){
+                $id = $this->session->userdata('warehouse_id');
+                $this->datatables->where('warehouse_id',$id);
+            }
         echo $this->datatables->generate();
     }
 
@@ -74,6 +78,10 @@ class Customers extends MY_Controller {
                 'cf5' => $this->input->post('cf5'),
                 'cf6' => $this->input->post('cf6'),
             );
+
+        if(null != $this->session->userdata('warehouse_id')){
+            $data['warehouse_id'] = $this->session->userdata('warehouse_id');
+        }
         } elseif($this->input->post('add_customer')) {
             $this->session->set_flashdata('error', validation_errors());
             redirect('customers');

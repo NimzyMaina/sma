@@ -4,6 +4,506 @@
 		"selected_items":
 		[
 			[
+				"login",
+				"loginForm"
+			],
+			[
+				"pa",
+				"password"
+			],
+			[
+				"su",
+				"submit	(index.html)"
+			],
+			[
+				"lo",
+				"login"
+			],
+			[
+				"M",
+				"Maternal"
+			],
+			[
+				"ac",
+				"action	Attr"
+			],
+			[
+				"for",
+				"form	Tag"
+			],
+			[
+				"iss",
+				"isset	(remote2.php)"
+			],
+			[
+				"ima",
+				"images"
+			],
+			[
+				"te",
+				"template	(index.php)"
+			],
+			[
+				"ret",
+				"return	(helpers.php)"
+			],
+			[
+				"get",
+				"get_domain"
+			],
+			[
+				"_s",
+				"$_SESSION〔variable〕"
+			],
+			[
+				"_SE",
+				"$_SESSION〔variable〕"
+			],
+			[
+				"firs",
+				"first_name"
+			],
+			[
+				"ta",
+				"table_name"
+			],
+			[
+				"las",
+				"last_name"
+			],
+			[
+				"ge",
+				"getConnection	(index.php)"
+			],
+			[
+				"data",
+				"database"
+			],
+			[
+				"fu",
+				"function"
+			],
+			[
+				"class",
+				"classmap"
+			],
+			[
+				"__c",
+				"__construct〔function〕"
+			],
+			[
+				"DB",
+				"DB_HOST=localhost"
+			],
+			[
+				"re",
+				"result"
+			],
+			[
+				"net_",
+				"net_unit_price"
+			],
+			[
+				"product",
+				"product_name"
+			],
+			[
+				"route",
+				"route_id"
+			],
+			[
+				"unit",
+				"unit_price"
+			],
+			[
+				"Re",
+				"Reference	(Sales.php)"
+			],
+			[
+				"refer",
+				"reference_no"
+			],
+			[
+				"wareho",
+				"warehouse"
+			],
+			[
+				"A",
+				"AND"
+			],
+			[
+				"cont",
+				"controls"
+			],
+			[
+				"warehouse",
+				"warehouse_id"
+			],
+			[
+				"print",
+				"print_r($this"
+			],
+			[
+				"com",
+				"companies"
+			],
+			[
+				"customer",
+				"customer_id"
+			],
+			[
+				"sma",
+				"sma_sales"
+			],
+			[
+				"full",
+				"full_name"
+			],
+			[
+				"out",
+				"outlets"
+			],
+			[
+				"outl",
+				"outlet_id"
+			],
+			[
+				"fore",
+				"foreach"
+			],
+			[
+				"is_nu",
+				"is_numeric"
+			],
+			[
+				"ke",
+				"key	(header.php)"
+			],
+			[
+				"con",
+				"contents"
+			],
+			[
+				"distributor",
+				"distributor_targets	(Reports.php)"
+			],
+			[
+				"dis",
+				"distributor	(Reports.php)"
+			],
+			[
+				"distributor_",
+				"distributor_targets"
+			],
+			[
+				"user_",
+				"user_targets"
+			],
+			[
+				"report",
+				"reports"
+			],
+			[
+				"target",
+				"targets"
+			],
+			[
+				"ht",
+				"html	(Reports.php)"
+			],
+			[
+				"retur",
+				"return	(Reports_model.php)"
+			],
+			[
+				"strto",
+				"strtotime〔function〕"
+			],
+			[
+				"strt",
+				"strtotime〔function〕"
+			],
+			[
+				"date",
+				"date_format	(Reports_model.php)"
+			],
+			[
+				"retu",
+				"return"
+			],
+			[
+				"tar",
+				"targets"
+			],
+			[
+				"u",
+				"user	(Reports.php)"
+			],
+			[
+				"me",
+				"method"
+			],
+			[
+				"m",
+				"methd"
+			],
+			[
+				"meth",
+				"methodcup"
+			],
+			[
+				"getB",
+				"getBillerTaxMethod	(Auth_model.php)"
+			],
+			[
+				"io",
+				"ion_auth"
+			],
+			[
+				"group",
+				"group_name"
+			],
+			[
+				"fa",
+				"factor"
+			],
+			[
+				"in",
+				"input"
+			],
+			[
+				"use",
+				"userdata"
+			],
+			[
+				"sma_",
+				"sma_products"
+			],
+			[
+				"prin",
+				"print	(add.php)"
+			],
+			[
+				"uns",
+				"unserialize〔function〕"
+			],
+			[
+				"pro",
+				"products"
+			],
+			[
+				"arra",
+				"array"
+			],
+			[
+				"user",
+				"userdata"
+			],
+			[
+				"Con",
+				"Conversion"
+			],
+			[
+				"Convesr",
+				"Conversions"
+			],
+			[
+				"cus",
+				"custom"
+			],
+			[
+				"impot",
+				"import_csv"
+			],
+			[
+				"import",
+				"import_csv	(Products.php)"
+			],
+			[
+				"f",
+				"factor"
+			],
+			[
+				"conver",
+				"conversions"
+			],
+			[
+				"res",
+				"response"
+			],
+			[
+				"cate",
+				"category"
+			],
+			[
+				"pr",
+				"print_r	(Custom.php)"
+			],
+			[
+				"num",
+				"num_rows"
+			],
+			[
+				"us",
+				"userdata	(Custom_model.php)"
+			],
+			[
+				"getMO",
+				"getMonthlyTarget	(Custom_model.php)"
+			],
+			[
+				"van",
+				"van_id"
+			],
+			[
+				"unset",
+				"unset〔function〕"
+			],
+			[
+				"crea",
+				"created_by"
+			],
+			[
+				"padd",
+				"padding"
+			],
+			[
+				"getConver",
+				"getConversionByID	(Custom.php)"
+			],
+			[
+				"return",
+				"returned"
+			],
+			[
+				"c",
+				"conversions"
+			],
+			[
+				"edit_co",
+				"edit_conversion	(Custom.php)"
+			],
+			[
+				"print_r",
+				"print_r($q	(Van.php)"
+			],
+			[
+				"co",
+				"code"
+			],
+			[
+				"is",
+				"is_unique	(Van.php)"
+			],
+			[
+				"_P",
+				"$_POST〔variable〕"
+			],
+			[
+				"produ",
+				"product"
+			],
+			[
+				"wa",
+				"warehouse"
+			],
+			[
+				"q",
+				"qty"
+			],
+			[
+				"fo",
+				"form"
+			],
+			[
+				"col",
+				"colspan"
+			],
+			[
+				"th",
+				"th	Tag"
+			],
+			[
+				"mo",
+				"module"
+			],
+			[
+				"insert",
+				"insert_id"
+			],
+			[
+				"refe",
+				"reference_no"
+			],
+			[
+				"product_",
+				"product_code"
+			],
+			[
+				"adds",
+				"addslashes〔function〕"
+			],
+			[
+				"prod",
+				"product_details"
+			],
+			[
+				"recei",
+				"receipt_no"
+			],
+			[
+				"tra",
+				"transfers	(header.php)"
+			],
+			[
+				"getVanBy",
+				"getVanByID2	(Van.php)"
+			],
+			[
+				"van_",
+				"van_model"
+			],
+			[
+				"last",
+				"last_name	(Sales.php)"
+			],
+			[
+				"fir",
+				"first_name	(Sales.php)"
+			],
+			[
+				"datata",
+				"datatables	(Custom.php)"
+			],
+			[
+				"number",
+				"number_format〔function〕"
+			],
+			[
+				"tot",
+				"totals"
+			],
+			[
+				"tota",
+				"totals	(Reports.php)"
+			],
+			[
+				"ser",
+				"serialize〔function〕"
+			],
+			[
+				"month",
+				"months	(sales.php)"
+			],
+			[
+				"getMo",
+				"getMonths"
+			],
+			[
+				"json",
+				"json_encode($targets"
+			],
+			[
 				"in_",
 				"in_group	(Auth.php)"
 			],
@@ -12,394 +512,51 @@
 				"targets"
 			],
 			[
-				"ta",
-				"target"
-			],
-			[
-				"tar",
-				"target"
-			],
-			[
 				"cat",
 				"category"
-			],
-			[
-				"for",
-				"foreach	foreach …"
-			],
-			[
-				"date",
-				"datetime	(add.php)"
-			],
-			[
-				"mon",
-				"month"
-			],
-			[
-				"mk",
-				"mktime"
-			],
-			[
-				"full",
-				"full_name	(Target.php)"
-			],
-			[
-				"ur",
-				"uri	(Target.php)"
-			],
-			[
-				"set",
-				"set_flashdata"
-			],
-			[
-				"els",
-				"else"
-			],
-			[
-				"category_",
-				"category_targets	(Target_model.php)"
-			],
-			[
-				"target_",
-				"target_management"
-			],
-			[
-				"gropu",
-				"group_by	(Auth.php)"
-			],
-			[
-				"u",
-				"u_id"
-			],
-			[
-				"tag",
-				"target"
-			],
-			[
-				"arra",
-				"array	(Auth.php)"
-			],
-			[
-				"ca",
-				"category"
-			],
-			[
-				"print_",
-				"print_r($upg	(Auth.php)"
-			],
-			[
-				"f",
-				"form"
-			],
-			[
-				"ut",
-				"utf-8"
-			],
-			[
-				"cate",
-				"categories	(sales.php)"
-			],
-			[
-				"cag",
-				"category	(Auth_model.php)"
-			],
-			[
-				"auth",
-				"auth_model"
-			],
-			[
-				"fu",
-				"full_name	(Sales.php)"
-			],
-			[
-				"first",
-				"first_name"
-			],
-			[
-				"Man",
-				"Management	(sma_lang.php)"
-			],
-			[
-				"target",
-				"target_management	(sma_lang.php)"
-			],
-			[
-				"Ta",
-				"Target	(sma_lang.php)"
-			],
-			[
-				"Dis",
-				"Distributor"
-			],
-			[
-				"da",
-				"date"
-			],
-			[
-				"bill",
-				"biller"
-			],
-			[
-				"user",
-				"user"
-			],
-			[
-				"ino",
-				"ion_auth"
-			],
-			[
-				"monthly_",
-				"monthly_target	(reports_lang.php)"
-			],
-			[
-				"month",
-				"monthly	(Reports.php)"
-			],
-			[
-				"la",
-				"lang"
-			],
-			[
-				"use",
-				"user"
-			],
-			[
-				"te",
-				"temp"
-			],
-			[
-				"unit",
-				"unit_price"
-			],
-			[
-				"geta",
-				"getActiveSheet"
-			],
-			[
-				"li",
-				"library"
-			],
-			[
-				"exop",
-				"export_backoffice	(index.php)"
-			],
-			[
-				"fun",
-				"function"
-			],
-			[
-				"form_",
-				"form_action"
-			],
-			[
-				"sold",
-				"sold_by"
-			],
-			[
-				"sma",
-				"sma_users"
-			],
-			[
-				"biller",
-				"biller_id"
-			],
-			[
-				"sma_",
-				"sma_users"
-			],
-			[
-				"fir",
-				"first_name"
-			],
-			[
-				"bas",
-				"base_url"
-			],
-			[
-				"pa",
-				"paying"
-			],
-			[
-				"p",
-				"post"
-			],
-			[
-				"pr",
-				"product_code"
-			],
-			[
-				"product",
-				"product_code"
-			],
-			[
-				"pro",
-				"product"
-			],
-			[
-				"qu",
-				"quantity"
-			],
-			[
-				"product_",
-				"product_name"
-			],
-			[
-				"fi",
-				"first_name"
-			],
-			[
-				"OU",
-				"outlet_name"
-			],
-			[
-				"ROUTE",
-				"route_name"
-			],
-			[
-				"ro",
-				"route_id"
-			],
-			[
-				"route",
-				"route_id"
-			],
-			[
-				"rou",
-				"route_name"
-			],
-			[
-				"ou",
-				"outlets"
-			],
-			[
-				"wah",
-				"warehouse_id"
-			],
-			[
-				"ware",
-				"warehouse_id"
-			],
-			[
-				"custom",
-				"custom_fields"
-			],
-			[
-				"cus",
-				"custom_model"
-			],
-			[
-				"ex",
-				"extract"
-			],
-			[
-				"w",
-				"warehouse"
-			],
-			[
-				"array_p",
-				"array_push"
-			],
-			[
-				"res",
-				"result"
-			],
-			[
-				"arr",
-				"array"
-			],
-			[
-				"pos",
-				"post"
-			],
-			[
-				"cu",
-				"customer"
-			],
-			[
-				"wa",
-				"warehouse_id"
-			],
-			[
-				"print",
-				"print_r"
-			],
-			[
-				"prod",
-				"products_model"
-			],
-			[
-				"th",
-				"this"
-			],
-			[
-				"rece",
-				"receipt_no"
-			],
-			[
-				"out",
-				"outlet_id"
-			],
-			[
-				"in",
-				"input"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"contents": " if($warehouse_id) {\n        $this->datatables\n        ->select(\"sma_sales.id, sma_sales.date, sma_sales.reference_no, sma_sales.biller, sma_sales.customer,CONCAT(sma_users.first_name,' ',sma_users.last_name) as sold_by, sma_sales.sale_status, sma_sales.grand_total, sma_sales.paid, (sma_sales.grand_total-sma_sales.paid) as balance, sma_sales.payment_status\")\n        ->from('sma_sales')\n        ->join('sma_users','sma_sales.created_by = sma_users.id','inner')\n        ->where('sma_sales.warehouse_id', $warehouse_id);\n    } else {\n        $this->datatables\n               ->select(\"sma_sales.id, sma_sales.date, sma_sales.reference_no, sma_sales.biller, sma_sales.customer,CONCAT(sma_users.first_name,' ',sma_users.last_name) as sold_by, sma_sales.sale_status, sma_sales.grand_total, sma_sales.paid, (sma_sales.grand_total-sma_sales.paid) as balance, sma_sales.payment_status\")\n        ->from('sma_sales')\n        ->join('sma_users','sma_sales.created_by = sma_users.id','inner');\n    }\n\n\n\n\n\n\n    if($warehouse_id) {\n        $this->datatables->select(sma_sales.id, sma_sales.date, sma_sales.reference_no, sma_sales.biller, sma_sales.customer,CONCAT(sma_users.first_name,' ',sma_users.last_name) as sold_by, sma_sales.sale_status, sma_sales.grand_total, sma_sales.paid, (sma_sales.grand_total-sma_sales.paid) as balance, sma_sales.payment_status\")\n        ->from('sma_sales')\n        ->join('sma_sale_items','sma_sales.id = sma_sale_items.sale_id','inner')\n        ->join('sma_products','sma_sale_items.product_id = sma_products.id','inner')\n        ->join('sma_categories','sma_products.category_id = sma_categories.id')\n        ->join('sma_users','sma_sales.created_by = sma_users.id','inner')->unset_column('biller_id')\n        ->where('sma_sales.warehouse_id', $warehouse_id);\n    } else {\n         $this->datatables->select(sma_sales.id, sma_sales.date, sma_sales.reference_no, sma_sales.biller, sma_sales.customer,CONCAT(sma_users.first_name,' ',sma_users.last_name) as sold_by, sma_sales.sale_status, sma_sales.grand_total, sma_sales.paid, (sma_sales.grand_total-sma_sales.paid) as balance, sma_sales.payment_status\")\n        ->from('sma_sales')\n        ->join('sma_sale_items','sma_sales.id = sma_sale_items.sale_id','inner')\n        ->join('sma_products','sma_sale_items.product_id = sma_products.id','inner')\n        ->join('sma_categories','sma_products.category_id = sma_categories.id')\n        ->join('sma_users','sma_sales.created_by = sma_users.id','inner')->unset_column('biller_id');\n    }",
+			"contents": "APP_ENV=local\nAPP_DEBUG=true\nAPP_KEY=AWjGedVHz4CRlXGrcxXwKCh1Na1fafMQ\n\nDB_HOST=localhost\nDB_DATABASE=homestead\nDB_USERNAME=homestead\nDB_PASSWORD=secret\n\nCACHE_DRIVER=file\nSESSION_DRIVER=file\nQUEUE_DRIVER=sync\n\nMAIL_DRIVER=smtp\nMAIL_HOST=mailtrap.io\nMAIL_PORT=2525\nMAIL_USERNAME=null\nMAIL_PASSWORD=null\n\n\n\nln -s /home/kifahari/ripotiapp/public /home/kifahari/public_html/ripotiapp.com\n\necho 'alias artisan=\"/opt/php/php-5.6.0/bin/php /home/kifahari/ripotiapp/artisan\"' >> ~/.bashrc\nsource ~/.bashrc\n\n\n\\Log::info('I was here @ ' . \\Carbon::now());\n\n\n/usr/local/php566-cgi/bin/php /home/kifahari/ripotiapp/artisan schedule:run 1>> /dev/null 2>&1",
 			"settings":
 			{
-				"buffer_size": 2508,
+				"buffer_size": 642,
+				"line_ending": "Windows",
+				"name": "APP_ENV=local"
+			}
+		},
+		{
+			"file": "/C/xampp/htdocs/formvalidation-master/demo/index.html",
+			"settings":
+			{
+				"buffer_size": 8120,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/C/xampp/htdocs/maternal/.env",
+			"settings":
+			{
+				"buffer_size": 104,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"contents": "",
+			"file": "/C/xampp/htdocs/lost/application/controllers/claim.php",
 			"settings":
 			{
-				"buffer_size": 0,
+				"buffer_size": 3239,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "controllers/Auth.php",
+			"file": "/C/xampp/htdocs/maternal/test.php",
 			"settings":
 			{
-				"buffer_size": 44803,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/xampp/htdocs/sma/themes/default/views/sales/sales.php",
-			"settings":
-			{
-				"buffer_size": 8214,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "models/Auth_model.php",
-			"settings":
-			{
-				"buffer_size": 61092,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "models/Sales_model.php",
-			"settings":
-			{
-				"buffer_size": 56601,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/xampp/htdocs/sma/themes/default/views/auth/create_user.php",
-			"settings":
-			{
-				"buffer_size": 10399,
+				"buffer_size": 78,
 				"line_ending": "Windows"
 			}
 		},
@@ -407,112 +564,24 @@
 			"file": "controllers/Target.php",
 			"settings":
 			{
-				"buffer_size": 8148,
+				"buffer_size": 20963,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "/C/xampp/htdocs/sma/themes/default/views/target/targets.php",
+			"file": "/C/xampp/htdocs/maternal/login.php",
 			"settings":
 			{
-				"buffer_size": 4466,
-				"line_ending": "Windows"
+				"buffer_size": 5640,
+				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/C/xampp/htdocs/sma/themes/default/views/target/users.php",
+			"file": "/C/xampp/htdocs/maternal/css/formValidation.css",
 			"settings":
 			{
-				"buffer_size": 3688,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/xampp/htdocs/sma/themes/default/views/target/add.php",
-			"settings":
-			{
-				"buffer_size": 4137,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "models/Target_model.php",
-			"settings":
-			{
-				"buffer_size": 1597,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "models/Reports_model.php",
-			"settings":
-			{
-				"buffer_size": 16026,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "controllers/Reports.php",
-			"settings":
-			{
-				"buffer_size": 111073,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/xampp/htdocs/sma/themes/default/views/reports/staff_report.php",
-			"settings":
-			{
-				"buffer_size": 54292,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/xampp/htdocs/sma/themes/default/views/reports/sales.php",
-			"settings":
-			{
-				"buffer_size": 14893,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "models/Custom_model.php",
-			"settings":
-			{
-				"buffer_size": 4290,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "               <div class=\"form-group\">\n                                <?php echo lang('full_name', 'full_name'); ?> \n                                <div class=\"controls\">\n                                    <?php echo form_dropdown('user',$agents,set_value('user'),'class=\"form-control\" id=\"full_name\" required=\"required\" pattern=\".{3,10}\"'); ?>\n                                </div>\n                            </div>\n\n                            <div class=\"input_fields_wrap\">\n    <button class=\"add_field_button\">Add More Fields</button>\n    <div><input type=\"text\" name=\"mytext[]\"></div>\n</div>\n<?php $form = (String) form_dropdown('category[]',$categories,set_value('category[]'),'class=\"form-control\"  required=\"required\" pattern=\".{3,10}\"');?>\n\n                           <!-- <div class=\"form-group multi-fields\">\n                                <?php echo lang('category', 'category'); ?> \n                                <div class=\"controls multi-field\">\n                                    <?php echo form_dropdown('category[]',$categories,set_value('category[]'),'class=\"form-control\"  required=\"required\" pattern=\".{3,10}\"'); ?>\n                                         <div class=\"form-groujp\">\n                                            <?php echo lang('target', 'target'); ?> \n                                            <div class=\"controls\">\n                                                <input type=\"number\" id=\"target[]\" name=\"target[]\" class=\"form-control\" pattern=\".{4,20}\"/>\n                                            </div>\n                                        </div>\n                                        <div align=\"right\">\n                                        <button type=\"button\" class=\"remove-field btn btn-sm btn-danger\">Remove</button>\n                                        </div>\n                                </div>\n                            </div> -->\n\n\n\n\n\n\n\n\n\n\n                        <?php echo lang('category', 'category'); ?> \n                        <div class=\"form-group multi-fields\">\n                                <div class=\"multi-field\" id=\"point\">\n                                 <?php echo form_dropdown('category[]',$categories,set_value('category[]'),'class=\"form-control\" required=\"required\" '); ?>\n                                 <div class=\"form-groujp\">\n                                            <?php echo lang('target', 'target'); ?> \n                                            <div class=\"controls\">\n                                                <input type=\"number\" id=\"target[]\" name=\"target[]\" class=\"form-control\" pattern=\".{4,20}\"/>\n                                            </div>\n                                        </div>\n                                        \n                                  <button type=\"button\" class=\" btn btn-sm btn-danger remove-field\">Remove</button>\n                                  <br><br>\n                                </div>\n                              </div>     \n\n\n\n\n     <div class=\"form-group\">\n                                <?php echo lang('full_name', 'full_name'); ?> \n                                <div class=\"controls\">\n                                    <?php echo form_dropdown('category[]',$categories,set_value('category[]'),'class=\"form-control\" required=\"required\" '); ?>\n                                </div>\n                            </div> \n\n",
-			"settings":
-			{
-				"buffer_size": 3410,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/xampp/htdocs/sma/themes/default/views/custom/add_route.php",
-			"settings":
-			{
-				"buffer_size": 1078,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "controllers/Sales.php",
-			"settings":
-			{
-				"buffer_size": 119536,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "language/english/sma_lang.php",
-			"settings":
-			{
-				"buffer_size": 28195,
-				"line_ending": "Windows"
+				"buffer_size": 4293,
+				"line_ending": "Unix"
 			}
 		}
 	],
@@ -523,10 +592,14 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 392.0,
-		"last_filter": "packa",
+		"height": 173.0,
+		"last_filter": "insta",
 		"selected_items":
 		[
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
 			[
 				"packa",
 				"Package Control: Install Package"
@@ -536,7 +609,7 @@
 				"Package Control: Add Channel"
 			]
 		],
-		"width": 528.0
+		"width": 400.0
 	},
 	"console":
 	{
@@ -557,133 +630,140 @@
 	"expanded_folders":
 	[
 		"/C/xampp/htdocs/sma",
-		"/C/xampp/htdocs/sma/sma/libraries",
-		"/C/xampp/htdocs/sma/themes",
-		"/C/xampp/htdocs/sma/themes/default",
-		"/C/xampp/htdocs/sma/themes/default/assets",
-		"/C/xampp/htdocs/sma/themes/default/assets/js",
-		"/C/xampp/htdocs/sma/themes/default/views/target"
+		"/C/xampp/htdocs/sma/sma",
+		"/C/xampp/htdocs/sma/sma/controllers",
+		"/C/xampp/htdocs/maternal/css"
 	],
 	"file_history":
 	[
-		"/C/xampp/htdocs/sma/index.php",
-		"/C/xampp/htdocs/sma/themes/default/views/header.php",
-		"/C/xampp/htdocs/sma/themes/default/views/footer.php",
-		"/C/xampp/htdocs/agape/edit.php",
-		"/C/xampp/htdocs/sma/sma/libraries/Datatables.php",
-		"/C/xampp/htdocs/sma/themes/default/views/reports/users.php",
-		"/C/xampp/htdocs/sma/sma/language/english/sales_lang.php",
-		"/C/xampp/htdocs/sma/sma/language/english/notifications_lang.php",
-		"/C/xampp/htdocs/sma/sma/controllers/Reports.php",
-		"/C/xampp/htdocs/sma/themes/default/views/reports/monthly2.php",
-		"/C/xampp/htdocs/sma/sma/language/english/reports_lang.php",
-		"/C/xampp/htdocs/sma/sma/models/Reports_model.php",
-		"/C/xampp/htdocs/sma/themes/default/views/reports/staff_report.php",
-		"/C/xampp/htdocs/sma/themes/default/views/reports/monthly.php",
-		"/C/xampp/htdocs/sma/sma/models/Auth_model.php",
-		"/C/xampp/htdocs/sma/themes/default/views/auth/profile.php",
-		"/C/xampp/htdocs/sma/themes/default/views/sales/index.php",
-		"/C/xampp/htdocs/sma/themes/default/views/sales/add.php",
-		"/C/xampp/htdocs/sma/sma/models/Site.php",
-		"/D/backup/htdocs/sma/sma/models/Products_model.php",
-		"/C/xampp/htdocs/sma/sma/models/Products_model.php",
-		"/C/xampp/htdocs/sma/sma/controllers/api/Product.php",
-		"/C/xampp/htdocs/sma/sma/libraries/Sma.php",
-		"/C/xampp/htdocs/sma/themes/default/views/custom/outlets.php",
-		"/C/xampp/htdocs/sma/sma/controllers/Custom.php",
+		"/C/Users/nimzy/Downloads/Compressed/PaperBoard-Final-master/DEV/json_example/example.json",
+		"/C/xampp/htdocs/lost/application/controllers/post.php",
+		"/C/xampp/htdocs/lost/application/controllers/content.php",
+		"/C/xampp/htdocs/lost/application/models/user.php",
+		"/C/xampp/htdocs/ripotiapp/app/Http/Controllers/TestController.php",
+		"/C/xampp/htdocs/maternal/utils/helpers.php",
+		"/C/xampp/htdocs/maternal/classes/user.php",
+		"/C/xampp/htdocs/planner/login.php",
+		"/C/xampp/htdocs/planner/index.html",
+		"/C/xampp/htdocs/planner/classmap/database.php",
+		"/C/xampp/htdocs/planner/test.php",
+		"/C/xampp/htdocs/planner/.env",
+		"/C/xampp/htdocs/planner/admin/templates/header.php",
+		"/C/xampp/htdocs/planner/admin/templates/sidemenu.php",
+		"/C/xampp/htdocs/planner/.gitignore",
+		"/C/xampp/htdocs/planner/utils/helpers.php",
+		"/C/xampp/htdocs/planner/index.php",
+		"/C/xampp/htdocs/planner/admin/templates/footer.php",
+		"/C/xampp/htdocs/planner/admin/index.php",
+		"/C/xampp/htdocs/formvalidation-master/README.md",
+		"/C/xampp/htdocs/formvalidation-master/demo/message.html",
+		"/C/xampp/htdocs/formvalidation-master/demo/remote2.php",
+		"/C/xampp/htdocs/formvalidation-master/demo/mailgun.html",
+		"/C/xampp/htdocs/planner/bower_components/AdminLTE/bower.json",
+		"/C/xampp/htdocs/formvalidation-master/demo/ajaxSubmit.php",
+		"/C/xampp/htdocs/planner/bower_components/AdminLTE/pages/examples/login.html",
+		"/C/xampp/htdocs/lost/.htaccess",
+		"/C/xampp/htdocs/web/index.html",
+		"/C/xampp/htdocs/formvalidation-master/package.json",
+		"/C/xampp/htdocs/formvalidation-master/Gruntfile.js",
+		"/C/xampp/htdocs/formvalidation-master/demo/remote.php",
+		"/C/xampp/htdocs/crud/index.php",
+		"/C/xampp/htdocs/te/notification/.env",
+		"/C/xampp/htdocs/pus/index.html",
+		"/C/xampp/htdocs/pus/notification/index.php",
+		"/C/xampp/htdocs/crud/objects/category.php",
+		"/C/xampp/htdocs/crud/objects/product.php",
+		"/C/xampp/htdocs/planner/classmap/user.php",
+		"/C/xampp/htdocs/maternal/index.php",
+		"/C/xampp/htdocs/maternal/composer.json",
+		"/C/xampp/htdocs/Slim-MVC/Controller/Main.php",
+		"/C/xampp/htdocs/Slim-MVC/settings.php",
+		"/C/xampp/htdocs/crud/paging_product.php",
+		"/C/xampp/htdocs/maternal/.env",
+		"/C/xampp/htdocs/MLA/composer.json",
+		"/C/xampp/htdocs/planner/composer.json",
+		"/C/xampp/htdocs/maternal/classes/database.php",
+		"/C/xampp/htdocs/Slim-MVC/public/.htaccess",
+		"/C/xampp/htdocs/ripotiapp/.htaccess",
+		"/C/xampp/htdocs/planner/classmap/functions.php",
+		"/C/xampp/htdocs/maternal/test.php",
+		"/C/xampp/htdocs/te/notification/index.php",
+		"/C/xampp/htdocs/maternal/config/database.php",
+		"/C/xampp/htdocs/crud/create_product.php",
+		"/C/xampp/htdocs/lolo/README.md",
+		"/C/Users/nimzy/Downloads/sma1 (1).sql",
+		"/C/xampp/htdocs/crud/config/database.php",
+		"/C/xampp/htdocs/maternal/.env.example",
+		"/C/xampp/htdocs/lost/system/helpers/url_helper.php",
+		"/C/xampp/htdocs/maternal/README.md",
+		"/C/xampp/htdocs/maternal/classes/db.php",
+		"/C/xampp/htdocs/maternal/notification/database.php",
+		"/C/xampp/htdocs/te/index.php",
+		"/C/xampp/htdocs/te/composer.json",
+		"/C/xampp/htdocs/pus/composer.json",
+		"/C/xampp/htdocs/realtime-notifications-tutorial/README.md",
+		"/C/xampp/htdocs/te/vendor/pusher/pusher-php-server/lib/Pusher.php",
+		"/C/xampp/htdocs/te/vendor/vlucas/phpdotenv/src/Validator.php",
+		"/C/xampp/htdocs/te/vendor/vlucas/phpdotenv/src/Loader.php",
+		"/C/xampp/htdocs/te/vendor/vlucas/phpdotenv/src/Dotenv.php",
+		"/C/xampp/htdocs/grid/js/demo.js",
+		"/C/xampp/htdocs/te/new.php",
+		"/C/xampp/htdocs/grid/index.html",
+		"/C/xampp/htdocs/grid/EditableGrid.php",
+		"/C/xampp/htdocs/grid/config.php",
 		"/C/xampp/htdocs/sma/sma/models/Sales_model.php",
 		"/C/xampp/htdocs/sma/sma/controllers/Sales.php",
-		"/C/xampp/htdocs/sma/sma/language/english/auth_lang.php",
-		"/C/xampp/htdocs/android_login_api/include/DB_Functions.php",
-		"/C/xampp/htdocs/android_login_api/index.php",
-		"/D/backup/htdocs/sma/sma/controllers/api/Product.php",
-		"/C/xampp/htdocs/sma/sma/controllers/Products.php",
-		"/C/xampp/htdocs/sma/sma/helpers/update_helper.php",
-		"/C/xampp/htdocs/sma/sma/migrations/301_update.php",
-		"/C/xampp/htdocs/sma/themes/default/views/reports/index.php",
-		"/C/xampp/htdocs/sma/sma/language/english/sma_lang.php",
-		"/C/xampp/htdocs/sma/themes/default/views/auth/create_user.php",
-		"/C/xampp/htdocs/sma/themes/default/views/auth/edit_user.php",
-		"/C/xampp/htdocs/sma/sma/controllers/Auth.php",
-		"/C/xampp/htdocs/sma/sma/helpers/status_helper.php",
-		"/C/Program Files/Controller/config.conf",
-		"/C/Users/nimzy/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
-		"/C/xampp/htdocs/sma/sma/controllers/Billers.php",
-		"/C/Users/nimzy/Downloads/Products and Prices 30092015.csv",
-		"/C/xampp/htdocs/sma/sma/libraries/Ion_auth.php",
-		"/E/htdocs/simulation/application/config/foreign_chars.php",
-		"/C/xampp/htdocs/sma/sma/controllers/api/Sales.php",
-		"/C/xampp/htdocs/sma/themes/default/assets/js/core.js",
-		"/C/xampp/htdocs/eveready/sma/controllers/Sales.php",
-		"/C/xampp/htdocs/sma/themes/default/assets/js/custom.js",
-		"/C/xampp/htdocs/sma/themes/default/assets/js/sales.js",
-		"/C/xampp/htdocs/sma/themes/default/assets/js/exporting.js",
-		"/C/xampp/htdocs/sma/.htaccess",
-		"/C/xampp/htdocs/sma/themes/default/assets/js/barcode.js",
-		"/C/xampp/htdocs/sma/themes/default/assets/js/validator.js",
-		"/C/xampp/htdocs/sma/sma/config/hooks.php",
-		"/C/xampp/htdocs/sma/sma/config/autoload.php",
-		"/C/xampp/htdocs/sma/sma/config/ion_auth.php",
-		"/C/xampp/htdocs/sma/system/core/Hooks.php",
-		"/C/xampp/htdocs/sma/sma/hooks/index.html",
-		"/C/xampp/htdocs/sma/sma/third_party/Zend/Validate.php",
-		"/C/xampp/htdocs/sma/sma/core/MY_Loader.php",
-		"/C/xampp/htdocs/sma/sma/libraries/Bcrypt.php",
-		"/C/xampp/htdocs/sma/sma/libraries/Logs.php",
-		"/C/xampp/htdocs/sma/sma/libraries/Excel.php",
-		"/C/xampp/htdocs/sma/sma/libraries/MY_Profiler.php",
-		"/C/xampp/htdocs/sma/sma/hooks/Sma_hooks.php",
-		"/C/xampp/htdocs/sma/sma/libraries/Format.php",
-		"/C/xampp/htdocs/sma/sma/models/Custom_model.php",
-		"/C/xampp/htdocs/sma/sma/models/Corn_model.php",
-		"/C/xampp/htdocs/sma/sma/models/Cmt_model.php",
-		"/C/xampp/htdocs/sma/themes/default/views/dashboard.php",
-		"/C/xampp/htdocs/sma/sma/models/Db_model.php",
-		"/C/xampp/htdocs/sma/sma/controllers/Welcome.php",
-		"/C/xampp/htdocs/foremen/foremen/config/config.php",
-		"/C/xampp/htdocs/sma/themes/default/assets/js/jquery.dataTables.dtFilter.min.js",
-		"/C/xampp/htdocs/sma/themes/default/assets/js/highcharts.js",
-		"/C/xampp/htdocs/sma/sma/controllers/api/Customer.php",
-		"/C/xampp/htdocs/sma/sma/controllers/api/custom.php",
-		"/C/xampp/htdocs/eveready/themes/default/views/sales/index.php",
-		"/C/xampp/htdocs/sma/themes/default/views/sales/edit.php",
-		"/C/xampp/htdocs/sma/themes/default/views/reports/sales.php",
-		"/C/xampp/htdocs/sma/sma/models/Companies_model.php",
-		"/C/xampp/htdocs/android_login_api/include/Config.php",
-		"/C/xampp/htdocs/sma/sma/controllers/System_settings.php",
-		"/C/xampp/htdocs/sma/sma/controllers/api/Login.php",
-		"/C/xampp/htdocs/sma/sma/models/Settings_model.php",
-		"/C/xampp/htdocs/sma/sma/controllers/Customers.php",
-		"/C/xampp/htdocs/sma/themes/default/views/settings/categories.php",
-		"/C/xampp/htdocs/sma/themes/default/views/custom/edit_route.php",
-		"/C/xampp/htdocs/sma/themes/default/views/custom/edit_outlet.php",
-		"/C/xampp/htdocs/sma/themes/default/views/custom/routes.php",
-		"/C/xampp/htdocs/sma/themes/default/views/custom/add_route.php",
-		"/C/xampp/htdocs/sma/themes/default/views/custom/add_outlet.php",
-		"/C/xampp/htdocs/sma/themes/default/views/settings/edit_category.php",
-		"/C/xampp/htdocs/sma/themes/default/views/settings/add_category.php",
-		"/C/Users/nimzy/Downloads/sample_products (1).csv",
-		"/C/Users/nimzy/Documents/Item Prices.csv",
-		"/C/xampp/htdocs/sma/sma/config/config.php",
-		"/E/htdocs/simulation/application/controllers/Test.php",
-		"/C/xampp/htdocs/sma/themes/default/views/sales/sales.php",
-		"/E/htdocs/sma/sma/controllers/api/Sales.php",
-		"/E/htdocs/simulation/application/views/upload_form.php",
-		"/D/eveready/sma/sma/config/config.php",
-		"/C/xampp/htdocs/sma/sma/config/routes.php",
-		"/C/xampp/htdocs/sma/themes/default/views/settings/warehouses.php",
-		"/C/xampp/htdocs/sma/themes/default/views/settings/edit_warehouse.php",
-		"/C/xampp/htdocs/sma/sma/language/english/settings_lang.php",
-		"/C/xampp/htdocs/sma/sma/config/user_agents.php",
-		"/C/xampp/htdocs/sma/sma.sql",
-		"/C/xampp/htdocs/sma/index.sublime-project",
+		"/C/xampp/htdocs/grid/config.php.sample",
+		"/C/xampp/htdocs/event/config/database.php",
+		"/C/xampp/htdocs/event/database/seeds/DatabaseSeeder.php",
+		"/C/xampp/htdocs/event/.env",
+		"/C/xampp/htdocs/event/.htaccess",
 		"/C/xampp/apache/conf/extra/httpd-vhosts.conf",
-		"/C/xampp/htdocs/sma/sma/config/database.php",
-		"/C/xampp/mysql/bin/sma.sql",
-		"/C/xampp/htdocs/sma/sma/config/sma.sql",
-		"/C/xampp/phpMyAdmin/config.inc.php",
-		"/C/xampp/htdocs/index.php",
-		"/C/xampp/htdocs/foremen/index.sublime-project"
+		"/C/xampp/htdocs/te/auth.php",
+		"/C/xampp/htdocs/event/storage/database.sqlite",
+		"/C/xampp/htdocs/ripotiapp/.env",
+		"/C/xampp/htdocs/te/auth.txt",
+		"/D/LORINE/maternithhealth/login.html",
+		"/C/xampp/htdocs/ripotiapp/public/bower_components/preload/_scripts/main.js",
+		"/C/Users/nimzy/Downloads/Compressed/30-css-page-preload-animations/_css/Icomoon/style.css",
+		"/C/Users/nimzy/Downloads/Compressed/30-css-page-preload-animations/demo28.html",
+		"/C/xampp/htdocs/ripotiapp/app/Http/routes.php",
+		"/C/xampp/htdocs/sma/themes/default/views/sales/index.php",
+		"/C/xampp/htdocs/lost/application/controllers/claim.php",
+		"/C/xampp/htdocs/lost/application/controllers/email.php",
+		"/C/xampp/htdocs/Collo/app/Http/routes.php",
+		"/E/New folder (2)/AdminLTE-2.0.4/pages/examples/login.html",
+		"/C/xampp/htdocs/lost/application/config/database.php",
+		"/C/xampp/htdocs/Collo/.env",
+		"/C/xampp/htdocs/sma/sma/controllers/Reports.php",
+		"/C/xampp/htdocs/sbt/sendmail.php",
+		"/C/xampp/htdocs/maternithhealth/first.php",
+		"/C/xampp/htdocs/maternithhealth/login.php",
+		"/D/LORINE/maternithhealth/login.php",
+		"/C/xampp/htdocs/Collo/.htaccess",
+		"/C/xampp/htdocs/ripotiapp/resources/views/dashboard.blade.php",
+		"/C/xampp/htdocs/ripotiapp/resources/views/test.blade.php",
+		"/C/xampp/htdocs/ripotiapp/database/migrations/2014_10_12_000000_create_users_table.php",
+		"/C/xampp/htdocs/ripotiapp/app/Http/Controllers/Auth/AuthController.php",
+		"/C/xampp/htdocs/ripotiapp/app/Http/Middleware/Authenticate.php",
+		"/C/Users/nimzy/Projects/ripotiapp/config/auth.php",
+		"/C/xampp/htdocs/Collo/tests/ExampleTest.php",
+		"/C/xampp/htdocs/ripotiapp/database/factories/ModelFactory.php",
+		"/C/xampp/htdocs/ripotiappo/.htaccess",
+		"/C/xampp/htdocs/ripotiappo/application/config/database.php",
+		"/C/xampp/htdocs/ripotiappo/application/config/config.php",
+		"/C/xampp/htdocs/cellar/js/main.js",
+		"/C/xampp/htdocs/ripotiappo/application/config/rest.php",
+		"/C/xampp/htdocs/ripotiappo/application/config/routes.php",
+		"/C/Users/nimzy/Downloads/Final Products.csv",
+		"/C/xampp/htdocs/ripotiapp/app/Console/Commands/HappyBirthday.php",
+		"/C/xampp/htdocs/sma/sma/controllers/api/Sales.php",
+		"/C/xampp/htdocs/ripotiappo/application/views/login.php",
+		"/C/xampp/htdocs/ripotiappo/application/controllers/User.php",
+		"/C/xampp/htdocs/te/email.html",
+		"/C/xampp/htdocs/ripotiappo/application/.htaccess",
+		"/C/xampp/htdocs/ripotiappo/application/controllers/Welcome.php",
+		"/C/xampp/htdocs/sma/sma/libraries/Sma.php"
 	],
 	"find":
 	{
@@ -701,6 +781,112 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"2.",
+			"2.j",
+			"skin-purple",
+			"admin-lte",
+			"}}",
+			"{{",
+			"db",
+			"office",
+			"amount-paid",
+			"$paying",
+			"paying",
+			"state",
+			";\n",
+			"Route",
+			"User_model",
+			"n sales",
+			"getB",
+			"getDistributorTargetTable",
+			"staff_target",
+			"target",
+			"target_r",
+			"staff_re",
+			"repor",
+			"qaz",
+			"id",
+			"get2",
+			"actions",
+			"amount-paid",
+			"targets-con",
+			"#ajax",
+			"ajax",
+			"#ajax",
+			"HORIZONTAL FORM",
+			"sample_1",
+			"products",
+			"addS",
+			"cf1",
+			"n add",
+			"test",
+			"add_item",
+			"n sug",
+			"n add",
+			"customer",
+			"slcus",
+			"add_products",
+			"customers/suggestions",
+			"site",
+			"slcustomer",
+			"n su",
+			"digital_upload_path",
+			"_csv",
+			"csv",
+			"$rw",
+			"skin",
+			"popup_attributes",
+			"n popup_attributes",
+			"getVanByID",
+			"getVanById",
+			"targets-con",
+			">\n",
+			"wh_qt",
+			"wh_qty_1",
+			"warehouse_id",
+			"test(",
+			"syncQuantity",
+			"code",
+			"getProductByCode",
+			"getWarehouseProduct",
+			"getProductByCode",
+			"test(",
+			"page_construct",
+			"add_transfer_item",
+			"suggestions",
+			"getProductQuantity(",
+			"updateWarehouseQuantity",
+			"addTransfer",
+			"getAllWarehouses",
+			"addWarehouse",
+			"read_file",
+			"full_name",
+			"getAg",
+			"drop",
+			"access_denied",
+			"edit_wa",
+			"get_display_result",
+			"produce_output",
+			"select(",
+			"query(",
+			"query",
+			"slcustomer",
+			"get_stuff",
+			"getUserTargets",
+			"getSalesReport\n",
+			"');\n",
+			"xls",
+			">\n",
+			"action",
+			"action(",
+			"action",
+			"action_sa",
+			"sales_actions",
+			"$date",
+			"getUserTargets2",
+			"getu",
+			"getUs",
+			"date",
 			"in_array_r",
 			"start_date",
 			"date",
@@ -722,89 +908,7 @@
 			"slcustomer",
 			"addManually",
 			"getBackOffice",
-			"action",
-			"action_",
-			"slcustomer",
-			"Owner",
-			"pushba",
-			"action_s",
-			"sales_action",
-			"create_user(",
-			"create_user",
-			"monthly-con",
-			"staff_report",
-			"staff_reports",
-			"monthly_sales",
-			"staff_re",
-			"user_Code",
-			"code",
-			"SLData",
-			"getInvoiceByID",
-			"asle_ac",
-			"action_sa",
-			"product_upl",
-			"deleteSa",
-			"action",
-			"export_excel",
-			"export_excel(",
-			"export_excel",
-			"n pre_(",
-			"n pre(",
-			"_ion_hooks",
-			"pre_login",
-			"login",
-			"login(",
-			"event",
-			"login(",
-			"trigger_events(",
-			" trigger_events(",
-			"trigger_events(",
-			"(",
-			"post_login(",
-			"post_login",
-			"add(",
-			"add",
-			"$1",
-			"add",
-			"product_tax",
-			"item_tax_rate",
-			"product_ta",
-			"add_sa",
-			"base_url",
-			"td",
-			"href",
-			"tr",
-			"amount-paid",
-			"custom",
-			"ware",
-			"paid_b",
-			"sale_ac",
-			"category_has_subcategory",
-			"slwarehouse",
-			"add",
-			"profile",
-			"getQ",
-			"cg",
-			"paid",
-			"$!",
-			"$1",
-			"syncSalePayments",
-			"sale_id",
-			"syncSalePayments",
-			"payment_status",
-			"syncSalePayments",
-			"payment_ststus",
-			"calculateCost",
-			"getPurchasedItems",
-			"sales_get",
-			"sales_g",
-			"Owner",
-			"net_p",
-			"ware",
-			"warehouses",
-			"war",
-			"route",
-			"$cfg['UploadDir']"
+			"action"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -812,6 +916,10 @@
 		"regex": false,
 		"replace_history":
 		[
+			"skin-purple-light",
+			"AdminLTE",
+			"?>",
+			"<?="
 		],
 		"reverse": false,
 		"show_context": true,
@@ -822,7 +930,7 @@
 	"groups":
 	[
 		{
-			"selected": 7,
+			"selected": 5,
 			"sheets":
 			[
 				{
@@ -830,574 +938,225 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2508,
+						"buffer_size": 642,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2508,
-								996
+								151,
+								71
 							]
 						],
 						"settings":
 						{
-							"auto_complete": false,
+							"auto_name": "APP_ENV=local",
 							"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 20,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 19,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "controllers/Auth.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 44803,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								22294,
-								22119
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 6464.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 14,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "/C/xampp/htdocs/sma/themes/default/views/sales/sales.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 8214,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 16,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "models/Auth_model.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 61092,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								59664,
-								59670
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 22096.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 10,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "models/Sales_model.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 56601,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								9503,
-								9505
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 2687.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 8,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "/C/xampp/htdocs/sma/themes/default/views/auth/create_user.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 10399,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								8959,
-								8609
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1222.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 17,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "controllers/Target.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 8148,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								5285,
-								5285
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1463.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "/C/xampp/htdocs/sma/themes/default/views/target/targets.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4466,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2744,
-								2744
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 417.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"file": "/C/xampp/htdocs/sma/themes/default/views/target/users.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3688,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								3688
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"auto_name": "",
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 387.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 7,
 					"type": "text"
 				},
 				{
-					"buffer": 10,
-					"file": "/C/xampp/htdocs/sma/themes/default/views/target/add.php",
+					"buffer": 1,
+					"file": "/C/xampp/htdocs/formvalidation-master/demo/index.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4137,
+						"buffer_size": 8120,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1391,
-								1395
+								7855,
+								7392
 							]
 						],
 						"settings":
 						{
 							"auto_complete": false,
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 143.0,
-						"translation.y": 35.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 11,
-					"file": "models/Target_model.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1597,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1314,
-								1310
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/HTML/HTML.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 155.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 12,
-					"file": "models/Reports_model.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 16026,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								11691,
-								11691
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 2314.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 13,
-					"file": "controllers/Reports.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 111073,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								27933,
-								27943
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 7055.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 14,
-					"file": "/C/xampp/htdocs/sma/themes/default/views/reports/staff_report.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 54292,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								15384,
-								15411
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 4725.0,
+						"translation.y": 2337.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 4,
 					"type": "text"
 				},
 				{
-					"buffer": 15,
-					"file": "/C/xampp/htdocs/sma/themes/default/views/reports/sales.php",
+					"buffer": 2,
+					"file": "/C/xampp/htdocs/maternal/.env",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 14893,
+						"buffer_size": 104,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4189,
-								4189
+								0,
+								0
 							]
 						],
 						"settings":
 						{
-							"auto_complete": false,
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 337.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 9,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
-					"buffer": 16,
-					"file": "models/Custom_model.php",
+					"buffer": 3,
+					"file": "/C/xampp/htdocs/lost/application/controllers/claim.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4290,
+						"buffer_size": 3239,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								183,
+								0,
 								0
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 13,
-					"type": "text"
-				},
-				{
-					"buffer": 17,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3410,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2310,
-								2725
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/PHP/PHP.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 305.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 15,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 18,
-					"file": "/C/xampp/htdocs/sma/themes/default/views/custom/add_route.php",
+					"buffer": 4,
+					"file": "/C/xampp/htdocs/maternal/test.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1078,
+						"buffer_size": 78,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								649,
-								649
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "controllers/Target.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 20963,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7108,
+								7108
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2266.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "/C/xampp/htdocs/maternal/login.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5640,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "/C/xampp/htdocs/maternal/css/formValidation.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4293,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
@@ -1405,68 +1164,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 18,
-					"type": "text"
-				},
-				{
-					"buffer": 19,
-					"file": "controllers/Sales.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 119536,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								97184,
-								97244
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 12.0,
-						"translation.y": 29566.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 12,
-					"type": "text"
-				},
-				{
-					"buffer": 20,
-					"file": "language/english/sma_lang.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 28195,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								28195,
-								28195
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 5768.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 11,
+					"stack_index": 6,
 					"type": "text"
 				}
 			]
@@ -1507,11 +1205,15 @@
 	{
 		"height": 0.0
 	},
+	"output.unsaved_changes":
+	{
+		"height": 88.0
+	},
 	"pinned_build_system": "",
 	"project": "sma.sublime-project",
 	"replace":
 	{
-		"height": 42.0
+		"height": 62.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1553,7 +1255,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 290.0,
+	"side_bar_width": 281.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

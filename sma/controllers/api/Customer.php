@@ -65,6 +65,8 @@ if( null !== $this->session->userdata('user_id')) {
 
     function customers_get (){
         $customers = $this->companies_model->getAllCustomerCompaniesApp();
+
+        //print_r($customers);exit;
          
         if($customers){
             $data = array( 'error' => false,
@@ -74,8 +76,9 @@ if( null !== $this->session->userdata('user_id')) {
         }
  
         else{
-            $data = array('Error: No customers Found',404);
-            $this->response($data);
+            $data = array('error' => true,
+                'message' => 'No customers Found');
+            $this->response($data,404);
         }
     }
 function customer_post (){
@@ -130,8 +133,8 @@ function customer_post (){
                 'email' => $this->input->post('email'),
                 'group_id' => '3',
                 'group_name' => 'customer',
-                'customer_group_id' => $this->input->post('customer_group'),
-                'customer_group_name' => $this->input->post('customer_group_name'),
+                'customer_group_id' => 1,
+                'customer_group_name' => 'General',
                 'company' => $this->input->post('company'),
                 'address' => $this->input->post('address'),
                 'vat_no' => $this->input->post('vat_no'),
@@ -140,7 +143,7 @@ function customer_post (){
                 'postal_code' => $this->input->post('postal_code'),
                 'country' => $this->input->post('country'),
                 'phone' => $this->input->post('phone'),
-                'cf1' => $this->session->userdata('warehouse_id')
+                'warehouse_id' => $this->session->userdata('warehouse_id')
             );
     if($this->form_validation->run() == true && $this->companies_model->addCompany($data) == true) {
     $response = ['error' => false,
@@ -151,7 +154,7 @@ function customer_post (){
     $response = array('error' => true,
                 'message' => 'Customer Could not be Added');
 
-            $this->response($data,404);
+            $this->response($response,404);
     }
 }
  

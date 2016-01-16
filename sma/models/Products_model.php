@@ -27,6 +27,17 @@ class Products_model extends CI_Model {
         }
         return FALSE;
     }
+
+        public function getProductOptions2($pid) {
+        $q = $this->db->get_where('van_product_variants', array('product_id' => $pid));
+        if($q->num_rows() > 0) {
+            foreach (($q->result()) as $row) {
+                $data[] = $row;
+            }
+            return $data;
+        }
+        return FALSE;
+    }
     
     public function getProductOptionsWithWH($pid) {
         $this->db->select($this->db->dbprefix('product_variants').'.*, '.$this->db->dbprefix('warehouses').'.name as wh_name, '.$this->db->dbprefix('warehouses').'.id as warehouse_id, '.$this->db->dbprefix('warehouses_products_variants').'.quantity as wh_qty')

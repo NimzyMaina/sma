@@ -262,7 +262,7 @@ $('#add_item').bind('keypress', function(e) {
                             <div class="form-group">
                                 <?= lang("type","type"); ?>
                                 <?php $pst = array('select' => lang('select'),'duka' => lang('duka'), 'supermarket' => lang('supermarket'), 'Wholesale' => lang('Wholesale'));
-                            echo form_dropdown('type', $pst, '', 'class="form-control input-tip" required="required" id="type"'); ?>
+                            echo form_dropdown('type', $types, '', 'class="form-control input-tip" required="required" id="type"'); ?>
                             </div>
                         </div>
 
@@ -431,7 +431,6 @@ $('#add_item').bind('keypress', function(e) {
                                             <div class="form-group">
                                                 <?= lang("payment_reference_no", "payment_reference_no"); ?>
                                                 <?= form_input('payment_reference_no', (isset($_POST['payment_reference_no']) ? $_POST['payment_reference_no'] : $payment_ref), 'class="form-control tip" id="payment_reference_no" required="required"'); ?>
-                                                <?= $payment_ref; ?>
                                             </div>
                                         </div>
                                         <div class="col-sm-4">

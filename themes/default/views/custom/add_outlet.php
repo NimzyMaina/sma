@@ -10,6 +10,15 @@
             <p><?= lang('enter_info'); ?></p>
 
             <div class="form-group">
+                <?php echo lang('route_id', 'route_id'); ?>
+                 <div class="controls">
+                    <?php
+                    echo form_dropdown('route_id',$routes,set_value('route_id'),'id="route_id" data-placeholder="' . $this->lang->line("select") . ' ' . $this->lang->line("route_id") . '" required="required" class="form-control input-tip select" style="width:100%;"');
+                    ?> 
+                </div>
+            </div>
+
+            <div class="form-group">
                 <?php echo lang('outlet_id', 'name'); ?>
                 <div class="controls">
                 <?php echo form_input($name); ?>

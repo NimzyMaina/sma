@@ -139,13 +139,7 @@
                             </li>
                             <?php if($Owner && $Settings->update) { ?><li class="dropdown hidden-xs"><a class="btn blightOrange tip" title="<?= lang('update_available') ?>" data-placement="bottom" data-container="body" href="<?= site_url('system_settings/updates') ?>"><i class="fa fa-download"></i></a></li><?php } ?>
                             <?php if(($Owner || $Admin) && $qty_alert_num > 0) { ?><li class="dropdown hidden-xs"><a class="btn blightOrange tip" title="<?= lang('alerts') ?>" data-placement="left" href="<?= site_url('reports/quantity_alerts') ?>"><i class="fa fa-exclamation-triangle"></i><span class="number bwhite black"><?=$qty_alert_num;?></span></a></li><?php } ?>
-                            <?php if(POS) { ?>
-                            <li class="dropdown hidden-xs"><a class="btn bdarkGreen tip" title="<?= lang('pos') ?>" data-placement="left" href="<?= site_url('pos') ?>"><i class="fa fa-th-large"></i> <span class="padding05"><?=lang('pos')?></span></a></li>
-                            <?php } ?>
                             <?php if($Owner || $Admin) { ?>
-                            <?php if(POS) { ?>
-                            <li class="dropdown hidden-xs"><a class="btn bblue tip" title="<?= lang('list_open_registers') ?>" data-placement="bottom" href="<?=site_url('pos/registers')?>"><i class="fa fa-list"></i></a></li>
-                            <?php } ?>
                             <li class="dropdown hidden-xs"><a class="btn bred tip" title="<?= lang('clear_ls') ?>" data-placement="bottom" id="clearLS" href="#"><i class="fa fa-eraser"></i></a></li>
                             <?php } ?>
                         </ul>
@@ -196,23 +190,40 @@
                                         <a class="dropmenu" href="#"><i class="fa fa-plus"></i><span class="text"> <?= lang('custom_fields'); ?> </span> <span class="chevron closed"></span></a>
                                         <ul>
 
-                                            <li id="route_index"><a class="submenu" href="<?= site_url('custom/routes'); ?>"><i class="fa fa-plus-circle"></i><span class="text"> <?= lang('route_id'); ?></span></a></li>
-                                            <li id="outlet_index"><a class="submenu" href="<?= site_url('custom/outlets'); ?>"><i class="fa fa-plus-circle"></i><span class="text"> <?= lang('outlet_id'); ?></span></a></li>
+                                            <li id="custom_routes"><a class="submenu" href="<?= site_url('custom/routes'); ?>"><i class="fa fa-plus-circle"></i><span class="text"> <?= lang('route_id'); ?></span></a></li>
+                                            <li id="custom_outlets"><a class="submenu" href="<?= site_url('custom/outlets'); ?>"><i class="fa fa-plus-circle"></i><span class="text"> <?= lang('outlet_id'); ?></span></a></li> 
+                                            <li id="custom_types"><a class="submenu" href="<?= site_url('custom/types'); ?>"><i class="fa fa-plus-circle"></i><span class="text"> <?= lang('type'); ?></span></a></li>
+                                            <li id="custom_conversions"><a class="submenu" href="<?= site_url('custom/conversions'); ?>"><i class="fa fa-plus-circle"></i><span class="text"> <?= lang('conversions'); ?></span></a></li>
+                                           <!-- <li id="custom_product_conversions"><a class="submenu" href="<?= site_url('custom/product_conversions'); ?>"><i class="fa fa-plus-circle"></i><span class="text"> <?= lang('product_conversions'); ?></span></a></li> -->
+                                            <li id="custom_import_csv"><a class="submenu" href="<?= site_url('custom/import_csv'); ?>"><i class="fa fa-plus-circle"></i><span class="text"> <?= lang('import_csv'); ?></span></a></li>
                                             
                                         </ul>
                                     </li>
 
-                                    <li class="mm_targets">
+                                     <li class="mm_target">
                                         <a class="dropmenu" href="#"><i class="fa fa-plus"></i><span class="text"> <?= lang('target_management'); ?> </span> <span class="chevron closed"></span></a>
                                         <ul>
-
-                                            <li id="target_add"><a class="submenu" href="<?= site_url('target/add'); ?>"><i class="fa fa-plus-circle"></i><span class="text"> <?= lang('add_target'); ?></span></a></li>
+                                         <?php
+                                            if($Owner){ ?>
+                                            <li id="target_distributor"><a class="submenu" href="<?= site_url('target/distributor'); ?>"><i class="fa fa-plus-circle"></i><span class="text"> <?= lang('distributor_targets'); ?></span></a></li>
+                                            <?php } ?>
                                             <li id="target_index"><a class="submenu" href="<?= site_url('target'); ?>"><i class="fa fa-plus-circle"></i><span class="text"> <?= lang('list_targets'); ?></span></a></li>
+                                            <li id="target_add"><a class="submenu" href="<?= site_url('target/add'); ?>"><i class="fa fa-plus-circle"></i><span class="text"> <?= lang('add_target'); ?></span></a></li>
+                                            
+                                        </ul>
+                                    </li>       
+                                    <?php if($Admin){?>
+                                     <li class="mm_van">
+                                        <a class="dropmenu" href="#"><i class="fa fa-star"></i><span class="text"> <?= lang('van'); ?> </span> <span class="chevron closed"></span></a>
+                                        <ul>
+                                            <li id="van_index"><a class="submenu" href="<?= site_url('van'); ?>"><i class="fa fa-plus-circle"></i><span class="text"> <?= lang('list_vans'); ?></span></a></li>
+                                            <li id="van_transfers"><a class="submenu" href="<?= site_url('van/transfers'); ?>"><i class="fa fa-plus-circle"></i><span class="text"> <?= lang('van_transfers'); ?></span></a></li>
+                                            <li id="van_add_transfer"><a class="submenu" href="<?= site_url('van/add_transfer'); ?>"><i class="fa fa-plus-circle"></i><span class="text"> <?= lang('add_transfer'); ?></span></a></li>
                                             
                                         </ul>
                                     </li>                                    
 
-                                    <?php if($Admin){?>
+                                    
                                     <li class="mm_quotes">
                                         <a class="dropmenu" href="#"><i class="fa fa-heart-o"></i><span class="text"> <?= lang('quotes'); ?> </span> <span class="chevron closed"></span></a>
                                         <ul>
@@ -297,6 +308,10 @@
                                             <li id="reports_daily_sales"><a href="<?= site_url('reports/daily_sales') ?>"><i class="fa fa-calendar-o"></i><span class="text"> <?= lang('daily_sales'); ?></span></a></li>
                                             <li id="reports_monthly_sales"><a href="<?= site_url('reports/monthly_sales') ?>"><i class="fa fa-calendar-o"></i><span class="text"> <?= lang('monthly_sales'); ?></span></a></li>
                                             <li id="reports_sales"><a href="<?= site_url('reports/sales') ?>"><i class="fa fa-heart"></i><span class="text"> <?= lang('sales_report'); ?></span></a></li>
+                                            <li id="reports_user_targets"><a href="<?= site_url('reports/user_targets') ?>"><i class="fa fa-heart"></i><span class="text"> <?= lang('user_targets_report'); ?></span></a></li>
+                                            <?php if($Owner) {?>
+                                            <li id="reports_distributor_targets"><a href="<?= site_url('reports/distributor_targets') ?>"><i class="fa fa-heart"></i><span class="text"> <?= lang('distributor_targets_report'); ?></span></a></li>
+                                            <?php }?>
                                             <li id="reports_payments"><a href="<?= site_url('reports/payments') ?>"><i class="fa fa-money"></i><span class="text"> <?= lang('payments_report'); ?></span></a></li>
                                             <li id="reports_profit_loss"><a href="<?= site_url('reports/profit_loss') ?>"><i class="fa fa-money"></i><span class="text"> <?= lang('profit_and_loss'); ?></span></a></li>
                                             <li id="reports_purchases"><a href="<?= site_url('reports/purchases') ?>"><i class="fa fa-star"></i><span class="text"> <?= lang('purchases_report'); ?></span></a></li>

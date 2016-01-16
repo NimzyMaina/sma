@@ -199,6 +199,9 @@ class Site extends CI_Model {
                 case 'to':
                     $prefix = $this->Settings->transfer_prefix;
                     break;
+                case 'tov':
+                    $prefix = $this->Settings->transfer_prefix;
+                    break;
                 case 'do':
                     $prefix = $this->Settings->delivery_prefix;
                     break;
@@ -356,8 +359,31 @@ class Site extends CI_Model {
         return FALSE;
     }
 
+        public function getWarehouseProducts2($product_id) {
+        $q = $this->db->get_where('van_products', array('product_id' => $product_id));
+        if($q->num_rows() > 0) {
+            foreach (($q->result()) as $row) {
+                $data[] = $row;
+            }
+            return $data;
+        }
+        return FALSE;
+    }
+
     public function syncProductQty($product_id) {
         $wh_prs = $this->getWarehouseProducts($product_id);
+        $qty = 0;
+        foreach ($wh_prs as $row) {
+            $qty += $row->quantity;
+        }
+        if($this->db->update('products', array('quantity' => $qty), array('id' => $product_id))) {
+            return TRUE;
+        }
+        return FALSE;
+    }
+
+        public function syncProductQty2($product_id) {
+        $wh_prs = $this->getWarehouseProducts2($product_id);
         $qty = 0;
         foreach ($wh_prs as $row) {
             $qty += $row->quantity;

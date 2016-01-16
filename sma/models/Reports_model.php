@@ -242,6 +242,96 @@ class Reports_model extends CI_Model {
         return FALSE;
     }
 
+    public function get2($user_id,$year){
+        $sales = array();
+        $targets = array();
+        $query1 = "Select DATE_FORMAT( date, '%c' ) as month,sum(grand_total)
+                    from sma_sales
+                    where created_by = $user_id
+                    and DATE_FORMAT( date, '%Y' ) = $year
+                    group by DATE_FORMAT( date, '%c' )";
+        $q = $this->db->query($query1, false);
+        if($q->num_rows() > 0) {
+            foreach (($q->result()) as $row) {
+                $sales[] = $row;
+            }
+        }
+
+        $query2 = "SELECT DATE_FORMAT( date, '%c' ) as month,sum(target) as sum
+                    from sma_category_targets
+                    where u_id = $user_id
+                    and DATE_FORMAT( date, '%Y' ) = $year
+                    group by DATE_FORMAT( date, '%c' )";
+
+        $q = $this->db->query($query2, false);
+        if($q->num_rows() > 0) {
+            foreach (($q->result()) as $row) {
+                $targets[] = $row;
+            }
+        }
+
+        return $this->getOutput($sales,$targets);
+}
+
+public function getTag($category, $user,$date){
+
+        $strs = strtotime($date);
+
+        $month = date("m",$strs);
+        $year = date("Y",$strs);
+
+
+        $query = "SELECT sma_category_targets.target FROM sma_category_targets
+        where 
+        sma_category_targets.u_id in ($user) AND
+        sma_category_targets.category_id = $category AND
+        Date_format(sma_category_targets.date ,'%c') = $month AND
+        Date_format(sma_category_targets.date ,'%Y') = $year";
+
+        $q = $this->db->query($query,false);
+        if($q != NULL) {
+
+            if($q->num_rows() > 0){
+
+                foreach (($q->result()) as $row) {
+                    return $row->target;
+                }
+            }
+        }else{
+    return 0;}
+
+        //return $target;
+}
+
+public function getSal($category, $user,$date){
+        $strs = strtotime($date);
+
+        $month = date("m",$strs);
+        $year = date("Y",$strs);
+
+    $query = "SELECT DISTINCT(sma_sales.id),SUM(sma_sale_items.net_unit_price * sma_sale_items.quantity) as total FROM sma_sales, sma_sale_items, sma_products
+    where 
+    sma_sales.id = sma_sale_items.sale_id AND
+    sma_sale_items.product_id = sma_products.id AND
+    sma_sales.created_by in ($user) AND
+    sma_products.category_id = $category AND
+    Date_format(sma_sales.date ,'%c') = $month AND
+    Date_format(sma_sales.date ,'%Y') = $year";
+
+    $q = $this->db->query($query,false);
+    if($q != NULL){
+        if($q->num_rows() > 0) {
+            foreach (($q->result()) as $row) {
+                return $row->total;
+            }
+        }
+    }else{
+        return 0;
+        }
+
+}
+
+
     public function getPurchasesTotals($supplier_id) {
         $this->db->select('SUM(COALESCE(grand_total, 0)) as total_amount, SUM(COALESCE(paid, 0)) as paid', FALSE)
             ->where('supplier_id', $supplier_id);
@@ -408,6 +498,106 @@ class Reports_model extends CI_Model {
             return $q->row();
         }
         return FALSE;
+    }
+
+    function getOutput($salesArray, $targetsArray)
+{
+    $result = [];
+
+    //Adding months from targets
+    $i = 0;
+    foreach ($targetsArray as $targets) {
+        $targetArray = (array) $targets;
+        array_push($result, [$targetArray['month'], '0', '0']);
+        $i++;
+    }
+
+    //Adding months form sales
+    foreach ($salesArray as $sales) {
+
+        $saleArray = (array) $sales;
+
+        $add = TRUE;
+
+        foreach ($result as $row) {
+
+            if (in_array($saleArray['month'], $row)) {
+                $add = FALSE;
+            }
+        }
+
+        if ($add == TRUE) {
+            array_push($result, [$saleArray['month'], '0', '0']);
+        }
+
+        $i++;
+    }
+
+    //Adding Sales Amount
+    foreach ($salesArray as $sales) {
+
+        $saleArray = (array) $sales;
+
+        $add = TRUE;
+
+        $i = 0;
+        foreach ($result as $row) {
+
+            if ($row[0] == $saleArray['month']) {
+                $result[$i][1] = $saleArray['sum(grand_total)'];
+            }
+            $i++;
+        }
+
+        $i++;
+    }
+
+    //Addding Target Value
+    foreach ($targetsArray as $targets) {
+
+        $targetArray = (array) $targets;
+
+        $add = TRUE;
+
+        $i = 0;
+
+        foreach ($result as $row) {
+
+            if ($row[0] == $targetArray['month']) {
+                $result[$i][2] = $targetArray['sum'];
+            }
+            $i++;
+        }
+
+        $i++;
+    }
+
+    return $result;
+}
+
+
+    function getDistributorTargetTable($distId){
+
+       return  $users = $this->db->select('id')
+        ->from('users')
+        ->where('biller_id',$distId)
+        ->get()->result();
+
+    }
+
+    function getALLDistributorTargetTable(){
+
+        $dist = $this->db->select('id')
+        ->from('companies')
+        ->where('group_name','biller')
+        ->get()->result();
+
+        print_r($dist);
+
+        foreach ($dist as $value) {
+            $this->getDistributorTargetTable($value);
+        }
+
     }
 
 }

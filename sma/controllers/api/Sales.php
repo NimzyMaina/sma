@@ -59,26 +59,26 @@ class Sales extends REST_Controller {
     }
 
     function sales_get($warehouse_id = NULL){
-        if($this->session->userdata('group_id') == 1) {
-            $this->data['warehouses'] = $this->site->getAllWarehouses();
-            $this->data['warehouse_id'] = $warehouse_id;
-            $this->data['warehouse'] = $warehouse_id ? $this->site->getWarehouseByID($warehouse_id) : NULL;
-        } else {
-            $this->data['warehouses'] = NULL;
-            $this->data['warehouse_id'] = $this->session->userdata('warehouse_id');
-            $this->data['warehouse'] = $this->session->userdata('warehouse_id') ? $this->site->getWarehouseByID($this->session->userdata('warehouse_id')) : NULL;
-        }
+        // if($this->session->userdata('group_id') == 1) {
+        //     $this->data['warehouses'] = $this->site->getAllWarehouses();
+        //     $this->data['warehouse_id'] = $warehouse_id;
+        //     $this->data['warehouse'] = $warehouse_id ? $this->site->getWarehouseByID($warehouse_id) : NULL;
+        // } else {
+        //     $this->data['warehouses'] = NULL;
+        //     $this->data['warehouse_id'] = $this->session->userdata('warehouse_id');
+        //     $this->data['warehouse'] = $this->session->userdata('warehouse_id') ? $this->site->getWarehouseByID($this->session->userdata('warehouse_id')) : NULL;
+        // }
 
-        $this->sma->checkPermissions('index');
+        // $this->sma->checkPermissions('index');
 
-        if($this->session->userdata('group_id') != 1) {
-            $user = $this->site->getUser();
-            $warehouse_id = $user->warehouse_id;
-            $sales = $this->sales_model->testsales($warehouse_id);
-        }
-        else{
-            $sales = $this->sales_model->testsales();
-        }
+        // if($this->session->userdata('group_id') != 1) {
+        //     $user = $this->site->getUser();
+        //     $warehouse_id = $user->warehouse_id;
+        //     $sales = $this->sales_model->testsales($warehouse_id);
+        // }
+        // else{
+            $sales = $this->sales_model->getUserSales2();
+        //}
 
         if($sales){
             $data = array( 'error' => false,
@@ -193,7 +193,7 @@ function ref_get(){
         $this->form_validation->set_rules('route_id' , "Route ID" , 'required');
         $this->form_validation->set_rules('outlet_id' , "Outlet ID" , 'required');
         $this->form_validation->set_rules('type' , "Type" , 'required');
-        $this->form_validation->set_rules('receipt_no' , "Receipt No" , 'required');
+        $this->form_validation->set_rules('receipt_no' , "Receipt No" , 'required|is_unique[sales.receipt_no]');
 
 
 
@@ -223,7 +223,7 @@ function ref_get(){
              $receipt_no = form_error('receipt_no') ? form_error('receipt_no') : $this->post('receipt_no');
 
 
-            
+            $_POST = array();
 
             $response = array('error' => true,
                 //'reference_no' => strip_tags($reference_no),
@@ -267,9 +267,10 @@ function ref_get(){
             //} else {
                 //$date = date('Y-m-d H:i:s');
                 //(isset($_POST['date'])?$date = $_POST['date']:$date = date('Y-m-d H:i:s'));
-                $date = (isset($_POST['date']) ? $_POST['date'] : date('Y-m-d H:i:s'));
+                $date = (isset($_POST['date']) ? date('Y-m-d H:i:s',strtotime($_POST['date'])) : date('Y-m-d H:i:s'));
             //}
             $warehouse_id = $this->session->userdata('warehouse_id');
+            $van_id = (isset($_POST['van_id']) ? $_POST['van_id'] : '');
             $customer_id = $this->input->post('customer');
             $biller_id = $this->input->post('biller');
             $total_items = $this->input->post('total_items');
@@ -292,6 +293,8 @@ function ref_get(){
             $product_discount = 0;
             $order_discount = 0;
             $percentage = '%';
+            $item_conversion = 0;
+            $item_factor = 0;
             $i = isset($_POST['product_code']) ? sizeof($_POST['product_code']) : 0;
             for ($r = 0; $r < $i; $r++) {
                 $item_id = $_POST['product_id'][$r];
@@ -301,10 +304,16 @@ function ref_get(){
                 $item_option = isset($_POST['product_option'][$r]) ? $_POST['product_option'][$r] : NULL;
                 $option_details = $this->sales_model->getProductOptionByID($item_option);
                 $item_net_price = $this->sma->formatDecimal($_POST['net_price'][$r]);
-                $item_quantity = $_POST['quantity'][$r];
+                $item_quantity = $this->sma->formatDecimal($_POST['quantity'][$r]);
                 $item_serial = isset($_POST['serial'][$r]) ? $_POST['serial'][$r] : '';
                 $item_tax_rate = isset($_POST['product_tax'][$r]) ? $_POST['product_tax'][$r] : NULL;
                 $item_discount = isset($_POST['product_discount'][$r]) ? $_POST['product_discount'][$r] : NULL;
+                if(null != $_POST['conversion_qty'][$r]){
+                $item_conversion = $_POST['conversion_qty'][$r];//isset($_POST['conversion_qty'][$r] ? $_POST['conversion_qty'][$r] : NULL);
+                }
+                if(null !=  $_POST['factor'][$r]){
+                $item_factor = $_POST['factor'][$r];//isset($_POST['factor'][$r] ? $_POST['factor'][$r] : 1);
+                }
 
                 if(isset($item_code) && isset($item_net_price) && isset($item_quantity)) {
                     $product_details = $this->sales_model->getProductByCode($item_code);
@@ -352,6 +361,7 @@ function ref_get(){
                     $product_tax += $pr_item_tax;
 
                     $subtotal = (($item_net_price * $item_quantity) + $pr_item_tax) - $pr_item_discount;
+
                     $products[] = array(
                         'product_id' => $item_id,
                         'product_code' => $item_code,
@@ -362,13 +372,16 @@ function ref_get(){
                         'unit_price' => $this->sma->formatDecimal($item_net_price + $item_tax),
                         'quantity' => $item_quantity,
                         'warehouse_id' => $warehouse_id,
+                        'van_id' => $van_id,
                         'item_tax' => $pr_item_tax,
                         'tax_rate_id' => $pr_tax,
                         'tax' => $tax,
                         'discount' => $item_discount,
                         'item_discount' => $pr_item_discount,
                         'subtotal' => $this->sma->formatDecimal($subtotal),
-                        'serial_no' => $item_serial
+                        'serial_no' => $item_serial,
+                        'conversion_qty' => $item_conversion,
+                        'factor' => $item_factor
                         );
 
                     $total += $item_net_price * $item_quantity;
@@ -487,15 +500,23 @@ if($payment_status == 'partial' || $payment_status == 'paid') {
 }
 //var_dump($this->session->all_userdata());
 //$test = [$test,$biller_id,$this->site->getReference('pay')];
-            $this->sma->print_arrays($data, $products, $payment);exit;
+           // $this->sma->print_arrays($data, $products, $payment);exit;
 }
+//$_POST = array();
 
+$csi = array(
+    'reference_no' => $this->site->getReference('so'),
+    'data' => serialize($data),
+    'products' => serialize($products),
+    'payment' => serialize($payment));
+$this->db->insert('csi',$csi);
 
 if($this->form_validation->run() == true && $this->sales_model->addSale($data, $products, $payment)) {
     $this->session->set_userdata('remove_slls', 1);
     if($quote_id) { $this->db->update('quotes', array('status' => 'completed'), array('id' => $quote_id)); }
     //$this->session->set_flashdata('message', lang("sale_added"));
     //redirect("sales");
+    $_POST = array();
     $response = array(
         'error'=> false,
         'message' => 'Sales Added');
@@ -542,7 +563,7 @@ if($this->form_validation->run() == true && $this->sales_model->addSale($data, $
             $c++;
         }
         $this->data['quote_items'] = json_encode($pr);
-
+        $_POST = array();
         $response = array(
             'error' => true,
             'message' => 'Sale Not Added');

@@ -19,7 +19,15 @@
                             $biller_logos[$value] = $value;
                         }
                         echo form_dropdown('logo', $biller_logos, $biller->logo, 'class="form-control select" id="biller_logo" required="required" '); ?>
-                    </div>     
+                    </div>  
+
+                                         <div class="form-group">
+                        <?= lang("tax_method", "tax_method"); ?>
+                        <?php 
+                        $options = array('inclusive' => 'Incusive',
+                            'exclusive' => 'Exclusive');
+                        echo form_dropdown('tax_method', $options, $biller->tax_method , 'class="form-control select" id="tax_method" required="required" '); ?>
+                    </div>    
                 </div>
 
                 <div class="col-md-6">      

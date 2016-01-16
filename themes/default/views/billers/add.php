@@ -23,7 +23,15 @@
                 </div>
 
                 <div class="col-md-6">      
-                    <div id="logo-con" class="text-center"></div>   
+                  <!--  <div id="logo-con" class="text-center"></div>   -->
+
+                   <div class="form-group">
+                        <?= lang("tax_method", "tax_method"); ?>
+                        <?php 
+                        $options = array('inclusive' => 'Incusive',
+                            'exclusive' => 'Exclusive');
+                        echo form_dropdown('tax_method', $options, '', 'class="form-control select" id="tax_method" required="required" '); ?>
+                    </div>   
                 </div>
             </div>
             <div class="row">

@@ -28,7 +28,8 @@ class Companies_model extends CI_Model {
         return FALSE;
     }
 
-    public function getAllCustomerCompaniesApp($id) {
+    public function getAllCustomerCompaniesApp() {
+        $warehouse_id = $this->session->userdata('warehouse_id');
         $q = $this->db->get_where('companies', array('group_name' => 'customer'));
         if($q->num_rows() > 0) {
             foreach (($q->result()) as $row) {
@@ -73,7 +74,12 @@ class Companies_model extends CI_Model {
     }
 
     public function getCompanyByID($id) {
+        if(null != $this->session->userdata('warehouse_id')){
+            $warehouse_id = $this->session->userdata('warehouse_id');
+        $q = $this->db->get_where('companies', array('id' => $id,'warehouse_id' => $warehouse_id));
+    }else{
         $q = $this->db->get_where('companies', array('id' => $id), 1);
+    }
         if($q->num_rows() > 0) {
             return $q->row();
         }
@@ -157,7 +163,14 @@ class Companies_model extends CI_Model {
     public function getCustomerSuggestions($term, $limit = 10) {
         $this->db->select("id, CONCAT(company, ' (', name, ')') as text", FALSE);
         $this->db->where(" (id LIKE '%".$term."%' OR name LIKE '%".$term."%' OR company LIKE '%".$term."%' OR email LIKE '%".$term."%' OR phone LIKE '%".$term."%') ");
-        $q = $this->db->get_where('companies', array('group_name' => 'customer'), $limit);
+        //$q = $this->db->get_where('companies', array('group_name' => 'customer'), $limit);
+        if(null != $this->session->userdata('warehouse_id')){
+             $id = $this->session->userdata('warehouse_id');
+            $q = $this->db->get_where('companies', array('group_name' => 'customer','warehouse_id' => $id), $limit);
+            $this->db->where('warehouse_id',$id);
+        }else{
+            $q = $this->db->get_where('companies', array('group_name' => 'customer'), $limit);
+        }
         if($q->num_rows() > 0) {
             foreach (($q->result()) as $row) {
                 $data[] = $row;

@@ -69,6 +69,7 @@ class Billers extends MY_Controller {
                 'cf5' => $this->input->post('cf5'),
                 'cf6' => $this->input->post('cf6'),
                 'invoice_footer' => $this->input->post('invoice_footer'),
+                'tax_method' => $this->input->post('tax_method')
             );
         } elseif($this->input->post('add_biller')) {
             $this->session->set_flashdata('error', validation_errors());
@@ -119,6 +120,7 @@ class Billers extends MY_Controller {
                 'cf5' => $this->input->post('cf5'),
                 'cf6' => $this->input->post('cf6'),
                 'invoice_footer' => $this->input->post('invoice_footer'),
+                'tax_method' => $this->input->post('tax_method')
             );
         } elseif($this->input->post('edit_biller')) {
             $this->session->set_flashdata('error', validation_errors());

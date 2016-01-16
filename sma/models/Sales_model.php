@@ -67,8 +67,31 @@ class Sales_model extends CI_Model {
         return FALSE;
     }
 
+        public function syncQuantity2($product_id, $warehouse_id, $quantity) {
+        if($warehouse_quantity = $this->getProductQuantity2($product_id, $warehouse_id)) {
+            $new_quantity = $warehouse_quantity['quantity'] - $quantity;
+            if($this->updateQuantity2($product_id, $warehouse_id, $new_quantity)) {
+                $this->site->syncProductQty2($product_id);
+                return TRUE;
+            }
+        } else {
+            if($this->insertQuantity2($product_id, $warehouse_id, -$quantity)) {
+                $this->site->syncProductQty2($product_id);
+                return TRUE;
+            }
+        }
+        return FALSE;
+    }
+
     public function insertQuantity($product_id, $warehouse_id, $quantity) {
         if($this->db->insert('warehouses_products', array( 'product_id' => $product_id, 'warehouse_id' => $warehouse_id, 'quantity' => $quantity ))) {
+            return true;
+        } 
+        return false;
+    }
+
+    public function insertQuantity2($product_id, $warehouse_id, $quantity) {
+        if($this->db->insert('van_products', array( 'product_id' => $product_id, 'van_id' => $warehouse_id, 'quantity' => $quantity ))) {
             return true;
         } 
         return false;
@@ -81,8 +104,23 @@ class Sales_model extends CI_Model {
         return false;
     }
 
+    public function updateQuantity2($product_id, $warehouse_id, $quantity) {     
+        if($this->db->update('van_products', array( 'quantity' => $quantity ), array('product_id' => $product_id, 'van_id' => $warehouse_id))) {
+            return true;
+        } 
+        return false;
+    }
+
     public function getProductQuantity($product_id, $warehouse) {
         $q = $this->db->get_where('warehouses_products', array('product_id' => $product_id, 'warehouse_id' => $warehouse), 1);
+        if($q->num_rows() > 0) {
+            return $q->row_array(); //$q->row();
+        }
+        return FALSE;
+    }
+
+      public function getProductQuantity2($product_id, $warehouse) {
+        $q = $this->db->get_where('van_products', array('product_id' => $product_id, 'van_id' => $warehouse), 1);
         if($q->num_rows() > 0) {
             return $q->row_array(); //$q->row();
         }
@@ -182,20 +220,23 @@ class Sales_model extends CI_Model {
     }
 
     public function getBackOffice($id){
-        $sql = "select c2.cf1 as biller_code, s.biller, c.cf1, c.cf2, c.name, s.date, ca.name as category, si.product_code,  si.product_name, si.quantity, c.cf3, si.tax, u.company, u.code, concat(u.first_name,' ',u.last_name) as sp_name, s.reference_no, s.outlet_id, s.type, s.route_id, si.unit_price , si.subtotal
+        $sql = "select c2.cf1 as biller_code, c2.state as region,s.biller, c.cf1, c.cf2, c.name, s.date, ca.name as category, si.product_code,  si.product_name, si.quantity, c.cf3, si.tax, u.company, u.code, concat(u.first_name,' ',u.last_name) as sp_name, s.reference_no, s.outlet_id, s.type, s.route_id, si.net_unit_price, si.unit_price,(si.quantity*si.net_unit_price) as subtotal
 
-from sma_sale_items si
+FROM sma_sale_items si 
 join sma_sales s on s.id = si.sale_id
-join sma_companies c on c.id = s.customer_id
 join sma_users u on u.id = s.created_by
-join sma_products p on p.id = si.product_id
-join sma_categories ca on ca.id = p.category_id
+join sma_companies c on c.id = s.customer_id
 join sma_companies c2 on s.biller_id = c2.id
+join sma_products p on p.code = si.product_code
+join sma_categories ca on ca.id = p.category_id
 
 where si.sale_id = $id";
         $q = $this->db->query($sql);
         if($q->num_rows() > 0){
-            return $q;
+            foreach (($q->result()) as $row) {
+                $data[] = $row;
+            }
+            return $data;
         }
         else{
             return false;
@@ -355,7 +396,40 @@ where si.sale_id = $id";
         return FALSE;
     }
 
+        public function updateProductOptionQuantity2($option_id, $warehouse_id, $quantity, $product_id) {
+        if($option = $this->getProductWarehouseOptionQty2($option_id, $warehouse_id)) {
+            $nq = $option->quantity - $quantity;
+            if($this->db->update('van_products_variants', array('quantity' => $nq), array('option_id' => $option_id, 'van_id' => $warehouse_id))) {
+                $this->site->syncVariantQty2($option_id);
+                return TRUE;
+            }
+        } else {
+            $nq = 0 - $quantity;
+            if($this->db->insert('van_products_variants', array('option_id' => $option_id, 'product_id' => $product_id, 'van_id' => $warehouse_id, 'quantity' => $nq))) {
+                $this->site->syncVariantQty2($option_id);
+                return TRUE;
+            }
+        }
+        return FALSE;
+    }
+
     public function addSale($data = array(), $items = array(), $payment = array()) {
+
+        if(null !=  $this->session->userdata('warehouse_id')){
+        $outlet = $data['outlet_id'];
+        $route = $data['route_id'];
+        $warehouse = $this->session->userdata('warehouse_id');
+
+        $result = $this->db->select('id')->from('routes')->where('route_name',$route)->get()->result();
+
+        if($result){
+            $this->db->like('outlet_name',$outlet)->update('outlets',array('route_id' => $result[0]->id));
+        }
+        else{
+            $this->db->insert('routes',array('route_name' => $route, 'warehouse_id' => $warehouse));
+            $this->db->insert('outlets',array('outlet_name' => $outlet, 'warehouse_id' => $warehouse));
+        }
+        }
 
         if($data['sale_status'] == 'completed') {
             if($this->Settings->accounting_method != 2 && !$this->Settings->overselling) {
@@ -395,7 +469,7 @@ where si.sale_id = $id";
             }
         }
 
-        //$this->sma->print_arrays($cost);exit;
+        //$this->sma->print_arrays($items);
 
         if($this->db->insert('sales', $data)) {
             $sale_id = $this->db->insert_id();
@@ -404,13 +478,25 @@ where si.sale_id = $id";
             }
             foreach ($items as $item) {
                 $item['sale_id'] = $sale_id;
-                $this->db->insert('sale_items', $item);
+                $temp = $item;
+                unset($temp['van_id']);
+                // unset($temp['conversion_qty']);
+                // unset($temp['van_id']);
+                 $this->db->insert('sale_items', $temp);
                 $sale_item_id = $this->db->insert_id();
                 if($data['sale_status'] == 'completed' && $this->site->getProductByID($item['product_id'])) {
                     if($item['product_type'] == 'standard') {
+                        if(!isset($item['van_id']) || $item['van_id'] == '' || $item['van_id'] == 0){
                         $this->syncQuantity($item['product_id'], $item['warehouse_id'], $item['quantity']);
+                    }else{
+                        $this->syncQuantity2($item['product_id'], $item['van_id'], $item['quantity']);
+                    }
                         if(isset($item['option_id']) && !empty($item['option_id'])) {
+                            if(!isset($item['van_id'])){
                             $this->updateProductOptionQuantity($item['option_id'], $item['warehouse_id'], $item['quantity'], $item['product_id']);
+                        }else{
+                            $this->updateProductOptionQuantity2($item['option_id'], $item['warehouse_id'], $item['quantity'], $item['product_id']);
+                        }
                         }
                     } elseif($item['product_type'] == 'combo') {
                         $combo_items = $this->getProductComboItems($item['product_id'], $item['warehouse_id']);
@@ -1116,6 +1202,8 @@ public function getQ (){
         $this->db->where('sma_sales.customer_id', $this->session->userdata('user_id'));
     }
 
+    $this->db->order_by('reference_no','desc');
+
     $q = $this->db->get();
         if($q->num_rows() > 0) {
             foreach (($q->result()) as $row) {
@@ -1125,6 +1213,54 @@ public function getQ (){
             return $data;
         }
 
+    }
+
+    public function getUserSales(){
+        $this->db->select('sma_sales.id,sma_sales.date,sma_sales.reference_no,sma_sales.biller,sma_sales.customer,sma_sales.sale_status, sma_sales.grand_total, sma_sales.paid, (sma_sales.grand_total-sma_sales.paid) as balance, sma_sales.payment_status,sma_users.first_name,sma_users.last_name,sma_sales.route_id,sma_sales.outlet_id,sma_sales.type,sma_sales.receipt_no,
+            sma_categories.name as category,sma_products.product_details,sma_sale_items.quantity,sma_sale_items.subtotal as val')
+        ->from('sma_sales')
+        ->join('sma_sale_items','sma_sales.id = sma_sale_items.sale_id','inner')
+        ->join('sma_products','sma_sale_items.product_id = sma_products.id','inner')
+        ->join('sma_categories','sma_products.category_id = sma_categories.id')
+        ->join('sma_users','sma_sales.created_by = sma_users.id','inner')
+        ->where('sma_sales.created_by', $this->session->userdata('user_id'));
+
+        $q = $this->db->get();
+        if($q->num_rows() > 0) {
+            foreach (($q->result()) as $row) {
+                $data[] = $row;
+            }
+
+            return $data;
+        }
+    }
+
+        public function getUserSales2(){
+            $d=date_create(date('Y-m-d'));
+           $p =  date_format($d,"Y-m-d H:i:s");
+            $date = date('m');
+        $this->db->select('distinct(sma_sales.id),sma_sales.date,sma_sales.reference_no,sma_sales.biller,sma_sales.customer,sma_sales.sale_status, sma_sales.grand_total, sma_sales.paid, (sma_sales.grand_total-sma_sales.paid) as balance, sma_sales.payment_status,sma_users.first_name,sma_users.last_name,sma_sales.route_id,sma_sales.outlet_id,sma_sales.type,sma_sales.receipt_no',false)
+        ->from('sma_sales')
+        //->join('sma_sale_items','sma_sales.id = sma_sale_items.sale_id','inner')
+        //->join('sma_products','sma_sale_items.product_id = sma_products.id','inner')
+        //->join('sma_categories','sma_products.category_id = sma_categories.id')
+        ->join('sma_users','sma_sales.created_by = sma_users.id','inner')
+        ->where('sma_sales.created_by', $this->session->userdata('user_id'))
+        ->where('sma_sales.date >=',$p)
+        ->order_by('sma_sales.date','desc')//inverted so that app displays in asc manner
+        
+        ->limit(5)
+        //->where('DATE_FORMAT( sma_sales.date, "%c" )',$date)
+        ;
+
+        $q = $this->db->get();
+        if($q->num_rows() > 0) {
+            foreach (($q->result()) as $row) {
+                $data[] = $row;
+            }
+
+            return $data;
+        }
     }
 
 }

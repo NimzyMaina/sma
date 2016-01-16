@@ -91,14 +91,14 @@ class Sales extends MY_Controller {
     $this->load->library('datatables');
    if($warehouse_id) {
         $this->datatables
-        ->select("id, date, reference_no, biller, customer,sold_by, REPLACE(REPLACE(push,0,'false'),1,'true') AS push, sale_status, grand_total, paid, (grand_total-paid) as balance, payment_status")
+        ->select("id, date, reference_no, biller, customer,sold_by, REPLACE(REPLACE(push,0,'false'),1,'true') AS push, sale_status, grand_total, date_format(date, '%c') as month,date_format(date, '%Y') as year, payment_status")
         ->from('sales')
         ->where('warehouse_id', $warehouse_id)
         //->where('push',0)
         ;
     } else {
         $this->datatables
-        ->select("id, date, reference_no, biller, customer,sold_by, REPLACE(REPLACE(push,0,'false'),1,'true') AS push, sale_status, grand_total, paid, (grand_total-paid) as balance, payment_status")
+        ->select("id, date, reference_no, biller, customer,sold_by, REPLACE(REPLACE(push,0,'false'),1,'true') AS push, sale_status, grand_total,  date_format(date, '%c') as month,date_format(date, '%Y') as year, payment_status")
         ->from('sales')
         //->where('push',0)
         ;
@@ -198,6 +198,7 @@ function view($id = NULL) {
     $return = $this->sales_model->getReturnBySID($id);
     $this->data['return_sale'] = $return;
     $this->data['rows'] = $this->sales_model->getAllInvoiceItems($id);
+   // print_r($this->data['rows']);exit;
     //$this->data['return_items'] = $return ? $this->sales_model->getAllReturnItems($return->id) : NULL;
     $this->data['paypal'] = $this->sales_model->getPaypalSettings();
     $this->data['skrill'] = $this->sales_model->getSkrillSettings();
@@ -672,6 +673,8 @@ if($this->form_validation->run() == true && $this->sales_model->addSale($data, $
     $this->data['tax_rates'] = $this->site->getAllTaxRates();
     $this->data['outlets'] = $this->custom_model->getOutletsDrop();
     $this->data['routes'] = $this->custom_model->getRoutesDrop();
+    $this->data['types'] = $this->custom_model->getTypesDrop();
+   // print_r($this->data['routes']);exit;
             //$this->data['currencies'] = $this->sales_model->getAllCurrencies();
     $this->data['slnumber'] = $this->site->getReference('so');
     $this->data['payment_ref'] = $this->site->getReference('pay');
@@ -1251,65 +1254,76 @@ function sale_actions() {
                 $this->excel->getActiveSheet()->setTitle(lang('sales'));
                 $this->excel->getActiveSheet()->SetCellValue('A1','Distributor ID');
                 $this->excel->getActiveSheet()->SetCellValue('B1','Distributor Name');
-                $this->excel->getActiveSheet()->SetCellValue('C1','Transaction Reference');
-                $this->excel->getActiveSheet()->SetCellValue('D1','Transaction Date');
-                $this->excel->getActiveSheet()->SetCellValue('E1','Customer Code');
-                $this->excel->getActiveSheet()->SetCellValue('F1','Customer Reference');
-                $this->excel->getActiveSheet()->SetCellValue('G1','Branch Code');
-                $this->excel->getActiveSheet()->SetCellValue('H1','Sales Type');
-                $this->excel->getActiveSheet()->SetCellValue('I1','Product Category');
-                $this->excel->getActiveSheet()->SetCellValue('J1','Product Code');
-                $this->excel->getActiveSheet()->SetCellValue('K1','Product Name');
-                $this->excel->getActiveSheet()->SetCellValue('L1','Location ID');
-                $this->excel->getActiveSheet()->SetCellValue('M1','Quantity');
-                $this->excel->getActiveSheet()->SetCellValue('N1','Selling Price');
-                $this->excel->getActiveSheet()->SetCellValue('O1','Amount');
-                $this->excel->getActiveSheet()->SetCellValue('P1','VAT');
-                $this->excel->getActiveSheet()->SetCellValue('Q1','Sales Person ID');
-                $this->excel->getActiveSheet()->SetCellValue('R1','Sales Person Name');
-                $this->excel->getActiveSheet()->SetCellValue('S1','Outlet');
-                $this->excel->getActiveSheet()->SetCellValue('T1','Store Type');
-                $this->excel->getActiveSheet()->SetCellValue('U1','Route');
-                $this->excel->getActiveSheet()->SetCellValue('V1','Month');
-                $this->excel->getActiveSheet()->SetCellValue('W1','Year');
+                $this->excel->getActiveSheet()->SetCellValue('C1','Territory');
+                $this->excel->getActiveSheet()->SetCellValue('D1','Transaction Reference');
+                $this->excel->getActiveSheet()->SetCellValue('E1','Transaction Date');
+                $this->excel->getActiveSheet()->SetCellValue('F1','Customer Code');
+                $this->excel->getActiveSheet()->SetCellValue('G1','Customer Reference');
+                $this->excel->getActiveSheet()->SetCellValue('H1','Branch Code');
+                $this->excel->getActiveSheet()->SetCellValue('I1','Sales Type');
+                $this->excel->getActiveSheet()->SetCellValue('J1','Product Category');
+                $this->excel->getActiveSheet()->SetCellValue('K1','Product Code');
+                $this->excel->getActiveSheet()->SetCellValue('L1','Product Name');
+                $this->excel->getActiveSheet()->SetCellValue('M1','Location ID');
+                $this->excel->getActiveSheet()->SetCellValue('N1','Quantity');
+                $this->excel->getActiveSheet()->SetCellValue('O1','Net Unit Price');
+                $this->excel->getActiveSheet()->SetCellValue('P1','Selling Price');
+                $this->excel->getActiveSheet()->SetCellValue('Q1','Amount');
+                $this->excel->getActiveSheet()->SetCellValue('R1','VAT');
+                $this->excel->getActiveSheet()->SetCellValue('S1','Sales Person ID');
+                $this->excel->getActiveSheet()->SetCellValue('T1','Sales Person Name');
+                $this->excel->getActiveSheet()->SetCellValue('U1','Outlet');
+                $this->excel->getActiveSheet()->SetCellValue('V1','Store Type');
+                $this->excel->getActiveSheet()->SetCellValue('W1','Route');
+                $this->excel->getActiveSheet()->SetCellValue('X1','Month');
+                $this->excel->getActiveSheet()->SetCellValue('Y1','Year');
 
                 $row = 2;
                 foreach ($_POST['val'] as $id){
+                    echo $id;
                     $sales = $this->sales_model->getBackOffice($id);
+                    echo '<pre>';
+                    print_r($sales);
+/*
+                    if($sales){
 
-                    foreach ($sales->result() as $sale){
-                        $temp = date_create($sale->date);
+                    foreach ($sales as $data_row){
+                        $temp = date_create($data_row->date);
                         $date =  date_format($temp,"Y-m-d");
                         $year =     date_format($temp,"Y");
                         $month = date_format($temp,"m");
-                        if ($sale->tax == '16.0000%'){$temp2 = 'Y';}else{$temp2 = 'N';}
+                        if ($data_row->tax == '16.0000%'){$temp2 = 'Y';}else{$temp2 = 'N';}
 
-                        $this->excel->getActiveSheet()->SetCellValue('A' . $row, $sale->biller_code);
-                        $this->excel->getActiveSheet()->SetCellValue('B' . $row, $sale->biller);
-                        $this->excel->getActiveSheet()->SetCellValue('C' . $row, $sale->reference_no);
-                        $this->excel->getActiveSheet()->SetCellValue('D' . $row, $date);
-                        $this->excel->getActiveSheet()->SetCellValue('E' . $row, $sale->cf2);
-                        $this->excel->getActiveSheet()->SetCellValue('F' . $row, $sale->name);
-                        $this->excel->getActiveSheet()->SetCellValue('G' . $row, $sale->cf3);
-                        $this->excel->getActiveSheet()->SetCellValue('H' . $row, $sale->cf1);
-                        $this->excel->getActiveSheet()->SetCellValue('I' . $row, $sale->category);
-                        $this->excel->getActiveSheet()->SetCellValue('J' . $row, $sale->product_code);
-                        $this->excel->getActiveSheet()->SetCellValue('K' . $row, $sale->product_name);
-                        $this->excel->getActiveSheet()->SetCellValue('L' . $row, $sale->company);
-                        $this->excel->getActiveSheet()->SetCellValue('M' . $row, $sale->quantity);
-                        $this->excel->getActiveSheet()->SetCellValue('N' . $row, $sale->unit_price);
-                        $this->excel->getActiveSheet()->SetCellValue('O' . $row, $sale->subtotal);
-                        $this->excel->getActiveSheet()->SetCellValue('P' . $row, $temp2);
-                        $this->excel->getActiveSheet()->SetCellValue('Q' . $row, $sale->code);
-                        $this->excel->getActiveSheet()->SetCellValue('R' . $row, $sale->sp_name);
-                        $this->excel->getActiveSheet()->SetCellValue('S' . $row, $sale->outlet_id);
-                        $this->excel->getActiveSheet()->SetCellValue('T' . $row, $sale->type);
-                        $this->excel->getActiveSheet()->SetCellValue('U' . $row, $sale->route_id);
-                        $this->excel->getActiveSheet()->SetCellValue('V' . $row, $month);
-                        $this->excel->getActiveSheet()->SetCellValue('W' . $row, $year);
+                                    $this->excel->getActiveSheet()->SetCellValue('A' . $row, $data_row->biller_code);
+                        $this->excel->getActiveSheet()->SetCellValue('B' . $row, $data_row->biller);
+                        $this->excel->getActiveSheet()->SetCellValue('C' . $row, $data_row->region);
+                        $this->excel->getActiveSheet()->SetCellValue('D' . $row, $data_row->reference_no);
+                        $this->excel->getActiveSheet()->SetCellValue('E' . $row, $date);
+                        $this->excel->getActiveSheet()->SetCellValue('F' . $row, $data_row->cf2);
+                        $this->excel->getActiveSheet()->SetCellValue('G' . $row, $data_row->name);
+                        $this->excel->getActiveSheet()->SetCellValue('H' . $row, $data_row->cf3);
+                        $this->excel->getActiveSheet()->SetCellValue('I' . $row, $data_row->cf1);
+                        $this->excel->getActiveSheet()->SetCellValue('J' . $row, $data_row->category);
+                        $this->excel->getActiveSheet()->SetCellValue('K' . $row, $data_row->product_code);
+                        $this->excel->getActiveSheet()->SetCellValue('L' . $row, $data_row->product_name);
+                        $this->excel->getActiveSheet()->SetCellValue('M' . $row, $data_row->company);
+                        $this->excel->getActiveSheet()->SetCellValue('N' . $row, $data_row->quantity);
+                        $this->excel->getActiveSheet()->SetCellValue('O' . $row, $data_row->net_unit_price);
+                        $this->excel->getActiveSheet()->SetCellValue('P' . $row, $data_row->unit_price);
+                        $this->excel->getActiveSheet()->SetCellValue('Q' . $row, $data_row->subtotal);
+                        $this->excel->getActiveSheet()->SetCellValue('R' . $row, $temp2);
+                        $this->excel->getActiveSheet()->SetCellValue('S' . $row, $data_row->code);
+                        $this->excel->getActiveSheet()->SetCellValue('T' . $row, $data_row->sp_name);
+                        $this->excel->getActiveSheet()->SetCellValue('U' . $row, $data_row->outlet_id);
+                        $this->excel->getActiveSheet()->SetCellValue('V' . $row, $data_row->type);
+                        $this->excel->getActiveSheet()->SetCellValue('W' . $row, $data_row->route_id);
+                        $this->excel->getActiveSheet()->SetCellValue('X' . $row, $month);
+                        $this->excel->getActiveSheet()->SetCellValue('Y' . $row, $year);
                         $row++;
                     }//RESULT LOOP
+                    } */
                 }//VAL LOOP
+                exit;
                 $this->excel->getActiveSheet()->getColumnDimension('A')->setWidth(20);
                 $this->excel->getActiveSheet()->getColumnDimension('B')->setWidth(20);
                 $this->excel->getActiveSheet()->getColumnDimension('C')->setWidth(20);
@@ -1331,6 +1345,11 @@ function sale_actions() {
                 $this->excel->getActiveSheet()->getColumnDimension('S')->setWidth(20);
                 $this->excel->getActiveSheet()->getColumnDimension('T')->setWidth(20);
                 $this->excel->getActiveSheet()->getColumnDimension('U')->setWidth(20);
+                $this->excel->getActiveSheet()->getColumnDimension('V')->setWidth(20);
+                $this->excel->getActiveSheet()->getColumnDimension('W')->setWidth(20);
+                $this->excel->getActiveSheet()->getColumnDimension('X')->setWidth(20);
+                $this->excel->getActiveSheet()->getColumnDimension('Y')->setWidth(20);
+
                 
 
                 $this->excel->getDefaultStyle()->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);

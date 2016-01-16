@@ -59,8 +59,10 @@ class Products extends MY_Controller {
 		. lang('actions') . ' <span class="caret"></span></button>
 		<ul class="dropdown-menu pull-right" role="menu">
 			<li>' . $detail_link . '</li>
-			<li><a href="' . site_url('products/add/$1') . '"><i class="fa fa-plus-square"></i> ' . lang('duplicate_product') . '</a></li>
-			<li><a href="' . site_url('products/edit/$1') . '"><i class="fa fa-edit"></i> ' . lang('edit_product') . '</a></li>';
+			<li><a href="' . site_url('products/add/$1') . '"><i class="fa fa-plus-square"></i> ' . lang('duplicate_product') . '</a></li>';
+			if($this->session->userdata('group_id') == 1){
+			$action .= '<li><a href="' . site_url('products/edit/$1') . '"><i class="fa fa-edit"></i> ' . lang('edit_product') . '</a></li>';
+			}
 			if($warehouse_id) {
 				$action .= '<li><a href="' . site_url('products/set_rack/$1/'.$warehouse_id) . '" data-toggle="modal" data-target="#myModal"><i class="fa fa-bars"></i> '
 				. lang('set_rack') . '</a></li>';
@@ -776,9 +778,11 @@ if($this->input->post('type') == 'standard') {
 	}
 	foreach ($warehouses as $warehouse) {
 		if($this->input->post('wh_qty_' . $warehouse->id)) {
+			$a = $this->input->post('wh_qty_' . $warehouse->id);
+			$num = str_replace( ',', '', $a );
 			$warehouse_qty[] = array(
 			                         'warehouse_id' => $this->input->post('wh_' . $warehouse->id),
-			                         'quantity' => $this->input->post('wh_qty_' . $warehouse->id),
+			                         'quantity' => $num,
 			                         'rack' => $this->input->post('rack_' . $warehouse->id) ? $this->input->post('rack_' . $warehouse->id) : NULL
 			                         );
 			$wh_total_quantity += $this->input->post('wh_qty_' . $warehouse->id); 

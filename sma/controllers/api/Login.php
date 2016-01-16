@@ -67,17 +67,18 @@ class Login extends REST_Controller{
                     $name = $a->name;
                 }
 
-                $b = $this->db->select('name')
+                $b = $this->db->select('name,tax_method')
                 ->from('companies')
                 ->where('id',$result->biller_id)
                 ->get()
                 ->result();
                 foreach ($b as $c){
                     $dist = $c->name;
+                    $methd = $c->tax_method;
                 }
                 
 
-                $distributor = array('distributor' => $dist);
+                $distributor = array('distributor' => $dist,'tax_type' => $methd);
                 
                 $warehouse = array("warehouse_name" => $name);
                 //echo $result->warehouse_id;exit;
